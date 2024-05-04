@@ -43,6 +43,7 @@ const Header = () => {
                 <hr className="dropdown-divider"></hr> 
               </li>
               <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+              <li><Link className="dropdown-item" to="/EnergyConsumptionPrediction">Model</Link></li>
             </ul>
           </li>
         </ul>

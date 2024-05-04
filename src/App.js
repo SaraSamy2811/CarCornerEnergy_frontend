@@ -8,10 +8,12 @@ import Offers from './pages/Offers';
   import MapComponent from './MapComponent/MapComponent';
 // import GasStations from './GasStations/GasStations';
 import ContactUs from './pages/ContactUs';
-import About from './pages/About'
+//import About from './pages/About'
 import Profile from './pages/Profile';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
+import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPrediction'
+
 //import GasStations from './GasStations/GasStations';
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
         {/* <Route path="/about" element={<About />} /> */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/EnergyConsumptionPrediction" element={<EnergyConsumptionPrediction />} />
+
 
       </Routes>
       <Footer/>
