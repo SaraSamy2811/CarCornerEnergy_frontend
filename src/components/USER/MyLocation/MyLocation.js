@@ -74,7 +74,7 @@ function MyLocationMap() {
                 <div>
                     <p>Latitude: {position.latitude}</p>
                     <p>Longitude: {position.longitude}</p>
-                    <button onClick={handleFindNearestStation}>Find Near Current Location</button>
+                    <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block"onClick={handleFindNearestStation}>Find Near Current Location</button>
                     {nearestStation && (
                         <div>
                             <h2>Nearest Station:</h2>
