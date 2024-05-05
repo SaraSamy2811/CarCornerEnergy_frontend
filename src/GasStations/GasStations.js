@@ -17,7 +17,7 @@ const GasStations = ({ apiKey, location }) => {
 
   const getGasStations = async () => {
     try {
-      const response = await axios.get('/api/v1/stations/nearby?userLong=30.99726187605872&userLat=29.990091438558945&minDistance=1&maxDistance=1000000', {
+      const response = await axios.get('/api/v1/stations/nearby', {
         params: {
           location,
           radius: 5000,
