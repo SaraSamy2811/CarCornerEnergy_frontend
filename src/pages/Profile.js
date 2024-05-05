@@ -32,12 +32,12 @@ function Profile() {
           Authorization: `Bearer ${token}`,
         },
       });
-      // const userData = response.data.data; // Assuming user data is in 'data' field
-      // setName(userData.name);
-      // setEmail(userData.email);
-      // setPhone(userData.phone);
-      // setCarType(userData.carType);
-      // setLoading(false);
+       const userData = response.data.data; // Assuming user data is in 'data' field
+      setName(userData.name);
+      setEmail(userData.email);
+      setPhone(userData.phone);
+      setCarType(userData.carType);
+      setLoading(false);
       alert('Your profile data has been successfully fetched!');
     } catch (error) {
       alert('Failed to fetch profile data!');
@@ -47,31 +47,32 @@ function Profile() {
     }
   };
 
-  const updateUserProfile = async () => {
-    setLoading(true);
+  // const updateUserProfile = async () => {
+  //   setLoading(true);
 
-    try {
-      const token = localStorage.getItem('authToken');
+  //   try {
+  //     const token = localStorage.getItem('authToken');
     
-      if (!token) {
-        setError('User not authenticated');
-        setLoading(false);
-        return;}
-      const userData = { name, email, phone, carType };
-      await axios.put('/api/v1/users/updateMe', userData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert('Your profile has been successfully updated!');
-      setLoading(false);
-    } catch (error) {
-      alert('Your profile update failed!');
-      setError('An error occurred while updating user profile.');
-      console.error('Error updating user profile:', error);
-      setLoading(false);
-    }
-  };
+  //     if (!token) {
+  //       setError('User not authenticated');
+  //       setLoading(false);
+  //       return;}
+  //     const userData = { name, email, phone, carType };
+  //     await axios.put('/api/v1/users/updateMe', userData, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     alert('Your profile has been successfully updated!');
+  //     setLoading(false);
+  //   } catch (error) {
+  //     alert('Your profile update failed!');
+  //     setError('An error occurred while updating user profile.');
+  //     console.error('Error updating user profile:', error);
+  //     setLoading(false);
+  //   }
+  // };
+  // useEffect(()=>{fetchUserProfile()},[])
 
   return (
     <div style={{ position: 'relative'}}>
@@ -86,8 +87,8 @@ function Profile() {
               <div className="card mb-4" 
               style={{ marginTop: "-180px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(1px)", borderRadius: '20px' }}>
                 <div className="card-body text-center">
-                  <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQSbHGqlY_9yEZMtHtM2NY1k8nPMkJ1TOWZOH-VWR0zcAZHl6J7PRensZzTTna8DVz8I0AT8D2yCQdapUw" alt="avatar" className="rounded-circle img-fluid" style={{ width: '150px',height:'150px' }} />
-                  <h5 className="my-3">Mohamed Sallah</h5>
+                  <img src="https://th.bing.com/th/id/OIP.Oo_9EZ_mdqBnbOIUVHbFAAHaHa?w=1200&h=1200&rs=1&pid=ImgDetMain" alt="avatar" className="rounded-circle img-fluid" style={{ width: '150px',height:'150px' }} />
+                  {/* <h5 className="my-3">Mohamed Sallah</h5> */}
                   <div className="d-flex justify-content-center mb-2">
                   </div>
                 </div>
@@ -132,7 +133,7 @@ function Profile() {
                       <p className="text-muted mb-0">{carType}</p>
                     </div>
                   </div>
-                  <button onClick={updateUserProfile}>Update Profile</button>
+                  {/* <button onClick={updateUserProfile}>Update Profile</button> */}
                 </div>
               </div>
             </div>

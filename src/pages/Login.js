@@ -43,19 +43,20 @@ const handleLogin = async () => {
     const response = await axios.post('/api/v1/auth/login ',userData);
     //const response = await login(userData);
     console.log('Login response:', response);
+    localStorage.setItem('authToken', response.data.token);
     // Check if login was successful
-    if (response.success) {
+
       // Redirect to HomeForUser page upon successful login
-      localStorage.setItem('authToken', response.data.token);
+      
       alert('Login successful!,,Happy to see you again use promocode(promo5)');
-      window.location.href = './HomeForUser';
-    } else {
+      // window.location.href = './HomeForUser';
+     
       // Display error message
       // setEmailError('Invalid email or password');
       // setPasswordError('Invalid email or password');
       alert('Login successful!,,Happy to see you again use promocode(promo5)');
       window.location.href = './HomeForUser';
-    }
+    
   } catch (error) {
     console.error('Error logging in:', error);
     // Handle error
