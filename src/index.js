@@ -6,12 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import "bootstrap"
 import "./assests/Francois_One/FrancoisOne-Regular.ttf"
 import '@fortawesome/fontawesome-free/css/all.css';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+
+   
     <App />
+   
+  
+ 
+    
+    
   </React.StrictMode>
 );
 
