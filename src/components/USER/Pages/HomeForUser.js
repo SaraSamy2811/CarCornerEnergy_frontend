@@ -1,12 +1,28 @@
 import React from 'react'
-
+import VideoBackground from '../../videobackground/VideoBackground';
 
 function HomeForUser() {
   return (
-    <div>
-        hoooomme
+    <div >
+      
+
+
+   
+     h
+
+
+     o
+
+
+
+     m
+
+
+
+     e
+
     </div>
   )
 }
 
-export default HomeForUser
+export default HomeForUser;
