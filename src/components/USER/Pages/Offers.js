@@ -9,6 +9,7 @@ const Offers = () => {
   const [promoCodeError, setPromoCodeError] = useState('');
   const [promoCode, setPromoCode] = useState('');
   const [paymentError, setPaymentError] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('cash'); // Default payment method
   const [paymentData, setPaymentData] = useState({
     nameOnCard: '',
     cardNumber: '',
@@ -21,6 +22,10 @@ const Offers = () => {
     if (name === 'promoCode') {
       setPromoCode(value);
       setPromoCodeError('');
+    } else if (name === 'paymentMethod') {
+      setPaymentMethod(value);
+      setPaymentError('');
+      setPromoCodeError(''); // Reset promo code error when payment method changes
     } else {
       setPaymentData({ ...paymentData, [name]: value });
       setPaymentError('');
@@ -53,57 +58,19 @@ const Offers = () => {
         setPromoCodeError('An error occurred while processing the request.');
       }
     }
-
-//////////////////////////////////////////
-    // try {
-    //  // const userData = { promoCode};
-    //   const response = await axios.get('/api/v1/coupons/:name', {promoCode});
-    
-    //   if (response.status >= 200 && response.status < 300) {
-    //     alert('PromoCode successful!');
-    //    // window.location.replace('./HomeForUser'); // Use replace instead of href
-    //   } else {
-    //     const errorMessage = response.data.error || 'An error occurred while send promoCode.';
-    //     setPromoCodeError(errorMessage);
-    //   }
-    // } catch (error) {
-    //   if (error.response) {
-    //     const errorMessage = error.response.data.error || 'An error occurred while send promoCode.';
-    //     setPromoCodeError(errorMessage);
-    //   } else if (error.request) {
-    //     setPromoCodeError('No response received from the server.');
-    //   } else {
-    //     setPromoCodeError('An error occurred while processing the request.');
-    //   }
-    // }
-  
-    ///////////////////////////
-    // try {
-    //  // const userData = { email, password };
-    //   const response = await axios.get('/api/v1/coupons/:name', { promoCode });
-    //   // Handle response accordingly
-    //   console.log('PromoCode response:', response.data);
-    //   alert('PromoCode successful!');
-    // } catch (error) {
-    //   console.error('Error adding promo code:', error);
-    //   setPromoCodeError('An error occurred while adding promo code.');
-    // }
   };
 
   const handlePaymentSubmit = async () => {
     const { nameOnCard, cardNumber, expiration, cvv } = paymentData;
-    if (!nameOnCard || !cardNumber || !expiration || !cvv) {
+    if (paymentMethod === 'visa' && (!nameOnCard || !cardNumber || !expiration || !cvv)) {
       setPaymentError('Please fill all payment fields.');
       return;
     }
-    ///////////////////////////
     try {
-      //const userData = { promoCode};
       const response = await axios.post('/api/v1/payment/choose', paymentData)
     
       if (response.status >= 200 && response.status < 300) {
         alert('payment successful!');
-       // window.location.replace('./HomeForUser'); // Use replace instead of href
       } else {
         const errorMessage = response.data.error || 'An error occurred while payment.';
         setPromoCodeError(errorMessage);
@@ -118,19 +85,6 @@ const Offers = () => {
         setPromoCodeError('An error occurred while processing the request.');
       }
     }
-  
-
-
-    //////////////////////////
-    // try {
-    //   const response = await axios.post('/api/v1/payment/choose', paymentData);
-    //   // Handle response accordingly
-    //   console.log('Payment response:', response.data);
-    //   alert('Payment successful!');
-    // } catch (error) {
-    //   console.error('Error processing payment:', error);
-    //   setPaymentError('An error occurred while processing payment.');
-    // }
   };
 
   return (
@@ -148,96 +102,89 @@ const Offers = () => {
                   <span className="text-warning">for your business</span>
                 </h1>
                 <p className="text-color">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-                  quibusdam tempora at cupiditate quis eum maiores libero
-                  veritatis? Dicta facilis sint aliquid ipsum atque?
+                  
                 </p>
               </div>
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <div className="card" style={{ borderRadius: '20px' }}>
                   <div className="card-body py-5 px-md-5">
                     <form>
-                      <div className="form-outline mb-4">
-                        <input type="text" id="form3Example3" className="form-control" name="promoCode" value={promoCode} onChange={handleInputChange} />
-                        <label className="form-label" htmlFor="form3Example3">Promo Code</label>
-                      </div>
-                      <button type="button" className="btn btn-dark btn-lg btn-block mb-4" onClick={handlePromoCodeSubmit}>
-                        Apply Promo Code
-                      </button>
-                      {promoCodeError && <p style={{ color: 'red' }}>{promoCodeError}</p>}
                       <hr className="my-4" />
                       <hr className="my-4" />
                       <h5 className="mb-4">Payment</h5>
                       <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm3" checked />
+                        <input className="form-check-input" type="radio" name="paymentMethod" id="checkoutForm3" value="visa" checked={paymentMethod === 'visa'} onChange={handleInputChange} />
                         <label className="form-check-label" htmlFor="checkoutForm3">
-                          Credit card
+                          Visa
                         </label>
                       </div>
                       <div className="form-check">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm4" />
+                        <input className="form-check-input" type="radio" name="paymentMethod" id="checkoutForm4" value="cash" checked={paymentMethod === 'cash'} onChange={handleInputChange} />
                         <label className="form-check-label" htmlFor="checkoutForm4">
-                          cash
+                          Cash
                         </label>
                       </div>
-                      <div className="form-check mb-4">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm5" />
-                        <label className="form-check-label" htmlFor="checkoutForm5">
-                          visa
-                        </label>
-                      </div>
-                      <div className="row mb-4">
-                        <div className="col">
-                          <div className="form-outline">
-                            <input type="text" id="formNameOnCard" className="form-control" name="nameOnCard" value={paymentData.nameOnCard} onChange={handleInputChange} />
-                            <label className="form-label" htmlFor="formNameOnCard">Name on card</label>
+                      {(paymentMethod === 'visa' || paymentMethod === 'cash') &&
+                        <div className="form-outline mb-4">
+                          <input type="text" id="form3Example3" className="form-control" name="promoCode" value={promoCode} onChange={handleInputChange} />
+                          <label className="form-label" htmlFor="form3Example3">Promo Code</label>
+                        </div>
+                      }
+                      {(paymentMethod === 'visa') &&
+                        <button type="button" className="btn btn-dark btn-lg btn-block mb-4" onClick={handlePromoCodeSubmit}>
+                          Apply Promo Code
+                        </button>
+                      }
+                      {promoCodeError && <p style={{ color: 'red' }}>{promoCodeError}</p>}
+                      {(paymentMethod === 'visa') &&
+                        <div className="row mb-4">
+                          <div className="col">
+                            <div className="form-outline">
+                              <input type="text" id="formNameOnCard" className="form-control" name="nameOnCard" value={paymentData.nameOnCard} onChange={handleInputChange} />
+                              <label className="form-label" htmlFor="formNameOnCard">Name on card</label>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <div className="form-outline">
+                              <input type="text" id="formCardNumber" className="form-control" name="cardNumber" value={paymentData.cardNumber} onChange={handleInputChange} />
+                              <label className="form-label" htmlFor="formCardNumber">Card number</label>
+                            </div>
                           </div>
                         </div>
-                        <div className="col">
-                          <div className="form-outline">
-                            <input type="text" id="formCardNumber" className="form-control" name="cardNumber" value={paymentData.cardNumber} onChange={handleInputChange} />
-                            <label className="form-label" htmlFor="formCardNumber">Credit card number</label>
+                      }
+                      {(paymentMethod === 'visa') &&
+                        <div className="row mb-4">
+                          <div className="col-3">
+                            <div className="form-outline">
+                              <input type="text" id="formExpiration" className="form-control" name="expiration" value={paymentData.expiration} onChange={handleInputChange} />
+                              <label className="form-label" htmlFor="formExpiration">Expiration</label>
+                            </div>
+                          </div>
+                          <div className="col-3">
+                            <div className="form-outline">
+                              <input type="text" id="formCVV" className="form-control" name="cvv" value={paymentData.cvv} onChange={handleInputChange} />
+                              <label className="form-label" htmlFor="formCVV">CVV</label>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="row mb-4">
-                        <div className="col-3">
-                          <div className="form-outline">
-                            <input type="text" id="formExpiration" className="form-control" name="expiration" value={paymentData.expiration} onChange={handleInputChange} />
-                            <label className="form-label" htmlFor="formExpiration">Expiration</label>
-                          </div>
-                        </div>
-                        <div className="col-3">
-                          <div className="form-outline">
-                            <input type="text" id="formCVV" className="form-control" name="cvv" value={paymentData.cvv}
-                                          onChange={handleInputChange} />
-                                                        <label className="form-label" htmlFor="formCVV">CVV</label>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <button type="button" className="btn btn-dark btn-lg btn-block" onClick={handlePaymentSubmit}>
-                                                    Continue to checkout
-                                                  </button>
-                                                  {paymentError && <p style={{ color: 'red' }}>{paymentError}</p>}
-                                                </form>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </section>
-                                </div>
-                              );
-                            };
-                            
-                            export default Offers;
-                            
-                            
-                           
+                      }
+                      <button type="button" className="btn btn-dark btn-lg btn-block" onClick={handlePaymentSubmit}>
+                        Continue to checkout
+                      </button>
+                      {paymentError && <p style={{ color: 'red' }}>{paymentError}</p>}
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
-
+export default Offers;
 
 
 

@@ -68,7 +68,7 @@ function Register() {
     
       if (response.status >= 200 && response.status < 300) {
         alert('Registration successful!');
-        window.location.replace('./HomeForUser'); // Use replace instead of href
+        window.location.replace('./USER'); // Use replace instead of href
          ////////////
         
       } else {

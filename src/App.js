@@ -13,7 +13,9 @@ import Profile from './components/USER/Pages/Profile';
 import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPrediction'
 import VisitorInterface from './components/VISITOR/VisitorInterface';
 import UserInterface from './components/USER/UserInterface';
+
 import AdminInterface from './components/ADMIN/AdminInterface'
+import ForgotPassword from './components/VISITOR/Pages/ForgotPassword';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+
           </Route>
 
           <Route path="/user"  element={<UserInterface/>}>

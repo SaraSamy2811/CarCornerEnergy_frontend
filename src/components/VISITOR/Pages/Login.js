@@ -6,10 +6,13 @@ import { Link } from 'react-router-dom';
 // import Footer from '../components/footer/Footer';
 //import '../css/Login.css';
 import LoginImge from '../../../assests/imges/pexels-photo-12205370.jpeg';
+
 import logo from '../../../assests/imges/logo2.png'
+
 import '../css/Login.css'
 import axios from 'axios';
 //import { useHistory } from 'react-router-dom';
+
 
 function Login() {
   const [emailError, setEmailError] = useState('');
@@ -55,7 +58,7 @@ const handleLogin = async () => {
       // setEmailError('Invalid email or password');
       // setPasswordError('Invalid email or password');
       alert('Login successful!,,Happy to see you again use promocode(promo5)');
-      window.location.href = './HomeForUser';
+      window.location.href = "./USER";
     
   } catch (error) {
     console.error('Error logging in:', error);
