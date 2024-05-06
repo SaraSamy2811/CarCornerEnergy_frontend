@@ -6,6 +6,7 @@ import Offers from './Pages/Offers'
 import MapComponent from './MapComponent/MapComponent'
 import HomeForUser from './Pages/HomeForUser'
 import HeaderForUser from './HeaderForUser'
+import Review from './Pages/Review'
 
 export default function UserInterface() {
   return (
@@ -16,6 +17,7 @@ export default function UserInterface() {
         <Offers/>
         <HomeForUser/>
         <MapComponent/>
+        <Review/>
       </Outlet>
       <Footer/>
     </div>

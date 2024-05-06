@@ -14,6 +14,7 @@ import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPredi
 import VisitorInterface from './components/VISITOR/VisitorInterface';
 import UserInterface from './components/USER/UserInterface';
 import AdminInterface from './components/ADMIN/AdminInterface'
+import Review from './components/USER/Pages/Review';
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
             <Route path="/user/offers" element={<Offers />} />
             <Route path="/user/map" element={<MapComponent />} />
             <Route path="/user/profile" element={<Profile />} />
-            <Route path="/user/EnergyConsumptionPrediction" element={<EnergyConsumptionPrediction />} /> 
+            <Route path="/user/EnergyConsumptionPrediction" element={<EnergyConsumptionPrediction />} />
+            <Route path="/user/review" element={<Review />} /> 
           </Route>
 
           <Route element={<AdminInterface/>}>

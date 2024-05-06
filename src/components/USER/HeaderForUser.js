@@ -54,10 +54,9 @@ function HeaderForUser() {
                         </ul>
 
                         <div className="d-flex align-items-center">
-                            {/* <button type="button" className="btn btn-link px-3 me-2">
-                                Logout
-                            </button> */}
-                    
+                        <button type="button" className="btn btn-link px-3 me-2">
+                                <Link to="/user/review">Review</Link> {/* Link to the review page */}
+                            </button>
 
 {/* Avatar */}
 <div className="avatar me-3">
