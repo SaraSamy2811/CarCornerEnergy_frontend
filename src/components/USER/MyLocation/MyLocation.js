@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// تحديد مسار الصور داخل مجلد الـ Leaflet
+const gasStationIcon = process.env.PUBLIC_URL + '/leaflet/red-map-pin-with-gas-station-sign-icon-isolated-vector-14374487.jpg';
+const userIcon = process.env.PUBLIC_URL + '/leaflet/marker-icon.png';
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371; 
@@ -69,17 +74,33 @@ function MyLocationMap() {
 
     return (
         <div style={{ textAlign: 'center' }}>
-            <h1>Gas Stations Near You</h1>
+            <h1 style={{ color: '#343a40', marginBottom: '20px' }}>Gas Stations Near You</h1>
             {position.latitude && position.longitude ? (
                 <div>
                     <p>Latitude: {position.latitude}</p>
                     <p>Longitude: {position.longitude}</p>
-                    <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block"onClick={handleFindNearestStation}>Find Near Current Location</button>
+                    <button
+                        onClick={handleFindNearestStation}
+                        style={{
+                            backgroundColor: '#ffc107',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '5px',
+                            padding: '10px 20px',
+                            fontSize: '18px',
+                            cursor: 'pointer',
+                            marginBottom: '20px'
+                        }}
+                    >
+                        Find Near Current Location
+                    </button>
                     {nearestStation && (
-                        <div>
-                            <h2>Nearest Station:</h2>
-                            <p>Name: {nearestStation.StationName}</p>
-                            <p>Distance: {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
+                        <div style={{ marginBottom: '20px' }}>
+                            {/* <h3 style={{ color: '#343a40' }}>Nearest Station</h3> */}
+                            {/* <p><strong>Name:</strong> {nearestStation.StationName}</p>
+                            <p><strong>Distance:</strong> {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
+                            <p><strong>Address:</strong> {nearestStation.address}</p>
+                            <p><strong>Description:</strong> {nearestStation.description}</p> */}
                         </div>
                     )}
                 </div>
@@ -87,35 +108,47 @@ function MyLocationMap() {
                 <p>Loading your location...</p>
             )}
             {position.latitude && position.longitude && (
-                <MapContainer center={[position.latitude, position.longitude]} zoom={13} style={{ height: '400px', width: '100%' }}>
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    {gasStations.map(station => (
-                        <Marker key={station._id} position={[station.station.coordinates[1], station.station.coordinates[0]]}>
-                            <Popup>
-                                {station.StationName}
-                                <p><strong>Address:</strong> {station.address}</p>
-                                <p><strong>Description:</strong> {station.description}</p>
-                            </Popup>
-                        </Marker>
-                    ))}
-                    {position.latitude && position.longitude && (
-                        <Marker position={[position.latitude, position.longitude]}>
-                            <Popup>
-                                Your Current Location
-                            </Popup>
-                        </Marker>
-                    )}
-                    {route.length > 0 && <Polyline positions={route} color="blue" />}
-                </MapContainer>
+                <div style={{ position: 'relative', marginBottom: '20px' }}>
+                    <div style={{ position: 'absolute', top: '10px', left: '10px', backgroundColor: '#f8f9fa', padding: '10px', borderRadius: '5px', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', zIndex: '1000' }}>
+                        {nearestStation && (
+                            <div>
+                                <h3 style={{ color: '#343a40' }}>Nearest Station</h3>
+                                <p><strong>Name:</strong> {nearestStation.StationName}</p>
+                                <p><strong>Distance:</strong> {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
+                                <p><strong>Address:</strong> {nearestStation.address}</p>
+                                <p><strong>Description:</strong> {nearestStation.description}</p>
+                            </div>
+                        )}
+                    </div>
+                    <MapContainer center={[position.latitude, position.longitude]} zoom={13} style={{ height: '400px', width: '100%' }}>
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        {gasStations.map(station => (
+                            <Marker key={station._id} position={[station.station.coordinates[1], station.station.coordinates[0]]} icon={L.icon({ iconUrl: gasStationIcon, iconSize: [30, 30], iconAnchor: [15, 30] })}>
+                                <Popup>
+                                    {station.StationName}
+                                    <p><strong>Address:</strong> {station.address}</p>
+                                    <p><strong>Description:</strong> {station.description}</p>
+                                </Popup>
+                            </Marker>
+                        ))}
+                        {position.latitude && position.longitude && (
+                            <Marker position={[position.latitude, position.longitude]} icon={L.icon({ iconUrl: userIcon })}>
+                                <Popup>
+                                    Your Current Location
+                                </Popup>
+                            </Marker>
+                        )}
+                        {route.length > 0 && <Polyline positions={route} color="blue" />}
+                    </MapContainer>
+                </div>
             )}
         </div>
     );
 }
 
 export default MyLocationMap;
-
 
 
 //  import React, { useState, useEffect } from 'react';
