@@ -30,20 +30,20 @@ const Header = () => {
           <Link className="nav-link active" to="/home">Home</Link> {/* Use Link component for Home */}
           </li>
           <li className="nav-item">
-          <Link className="nav-link" to="/map">Map</Link> {/* Use Link component for Map */}
+          <Link className="nav-link" to="/map">Map</Link> Use Link component for Map
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="google.com" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Others
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><Link className="dropdown-item" to="/offers">offers</Link></li>
+              {/* <li><Link className="dropdown-item" to="/offers">offers</Link></li> */}
               <li><Link className="dropdown-item" to="/contactus">ContactUs</Link></li>
               <li>
                 <hr className="dropdown-divider"></hr> 
               </li>
-              <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
-              <li><Link className="dropdown-item" to="/EnergyConsumptionPrediction">Model</Link></li>
+              {/* <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+              <li><Link className="dropdown-item" to="/EnergyConsumptionPrediction">Model</Link></li> */}
             </ul>
           </li>
         </ul>
