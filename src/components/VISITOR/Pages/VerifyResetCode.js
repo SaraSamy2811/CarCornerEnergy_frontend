@@ -6,17 +6,17 @@ import Logo from '../../../assests/imges/logo2.png';
 import '../css/Login.css';
 
 function VerifyResetCode() {
-  const [code, setCode] = useState('');
+  const [resetCode, setCode] = useState('');
   const [codeError, setCodeError] = useState('');
 
   const handleVerifyCode = async () => {
-    if (!code) {
+    if (!resetCode) {
       setCodeError('Please enter the verification code.');
       return;
     }
 
     try {
-      const response = await axios.post('/api/v1/auth/verifyResetCode', { code });
+      const response = await axios.post('/api/v1/auth/verifyResetCode', { resetCode});
       console.log('Code verification successful:', response);
       alert('Code verified successfully!');
       window.location.href = "./ResetPassword";
@@ -49,7 +49,7 @@ function VerifyResetCode() {
                           <span className="h1 fw-bold mb-0">Verify Reset Code</span>
                         </div>
                         <div data-mdb-input-init className="form-outline mb-4">
-                          <input type="text" id="form2Example17" className="form-control form-control-lg" name="code" value={code} onChange={handleInputChange} placeholder="Verification code" />
+                          <input type="text" id="form2Example17" className="form-control form-control-lg" name="code" value={resetCode} onChange={handleInputChange} placeholder="Verification code" />
                           <label className="form-label" htmlFor="form2Example17">Verification code</label>
                         </div>
                         <div className="pt-1 mb-4">

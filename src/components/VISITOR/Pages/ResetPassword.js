@@ -4,19 +4,24 @@ import axios from 'axios';
 import LoginImage from '../../../assests/imges/pexels-photo-12205370.jpeg';
 import Logo from '../../../assests/imges/logo2.png';
 import '../css/Login.css';
-
 function ResetPassword() {
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
   const handleResetPassword = async () => {
-    if (!password) {
+    if (!email) {
+      setPasswordError('Please enter your email.');
+      return;
+    }
+
+    if (!newPassword) {
       setPasswordError('Please enter a new password.');
       return;
     }
 
     try {
-      const response = await axios.post('/api/v1/auth/resetPassword', { password });
+      const response = await axios.put('/api/v1/auth/resetPassword', { email, newPassword });
       console.log('Password reset successful:', response);
       alert('Password reset successfully!');
       window.location.href = "./Login";
@@ -26,9 +31,15 @@ function ResetPassword() {
     }
   };
 
-  const handleInputChange = (e) => {
-    setPassword(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
+
+  const handleNewPasswordChange = (e) => {
+    setNewPassword(e.target.value);
+  };
+
+
 
   return (
     <div>
@@ -49,8 +60,10 @@ function ResetPassword() {
                           <span className="h1 fw-bold mb-0">Reset Password</span>
                         </div>
                         <div data-mdb-input-init className="form-outline mb-4">
-                          <input type="password" id="form2Example17" className="form-control form-control-lg" name="password" value={password} onChange={handleInputChange} placeholder="New Password" />
-                          <label className="form-label" htmlFor="form2Example17">New Password</label>
+                        <input type="email" placeholder="Enter your email" value={email} onChange={handleEmailChange} />
+      <input type="password" placeholder="Enter new password" value={newPassword} onChange={handleNewPasswordChange} />
+      <button onClick={handleResetPassword}>Reset Password</button>
+      {passwordError && <div>{passwordError}</div>}
                         </div>
                         <div className="pt-1 mb-4">
                           <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="button" onClick={handleResetPassword}>Reset Password</button>
