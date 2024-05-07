@@ -17,6 +17,8 @@ import UserInterface from './components/USER/UserInterface';
 import AdminInterface from './components/ADMIN/AdminInterface'
 import Review from './components/USER/Pages/Review';
 import ForgotPassword from './components/VISITOR/Pages/ForgotPassword';
+import ResetPassword from './components/VISITOR/Pages/ResetPassword';
+import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
 
 
 function App() {
@@ -31,6 +33,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
+            <Route path="/verifyResetCode" element={<VerifyResetCode/>} />
+
+
 
           </Route>
 

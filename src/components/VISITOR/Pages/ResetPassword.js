@@ -1,36 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../css/Login.css';
-// import LoginImage from '../../../assets/images/pexels-photo-12205370.jpeg';
 import LoginImage from '../../../assests/imges/pexels-photo-12205370.jpeg';
-// import Logo from '../../../assets/images/logo2.png';
-import Logo from '../../../assests/imges/logo2.png'
+import Logo from '../../../assests/imges/logo2.png';
+import '../css/Login.css';
 
+function ResetPassword() {
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-
-  const handleForgotPassword = async () => {
-    if (!email) {
-      setEmailError('Please enter your email address.');
+  const handleResetPassword = async () => {
+    if (!password) {
+      setPasswordError('Please enter a new password.');
       return;
     }
 
     try {
-      const response = await axios.post('/api/v1/auth/forgotPassword', { email });
-      console.log('Forgot password request successful:', response);
-      alert('Password reset email sent successfully!');
-      window.location.href = "./VerifyResetCode";
+      const response = await axios.post('/api/v1/auth/resetPassword', { password });
+      console.log('Password reset successful:', response);
+      alert('Password reset successfully!');
+      window.location.href = "./Login";
     } catch (error) {
-      console.error('Error sending password reset request:', error);
-      setEmailError('Error sending password reset request. Please try again later.');
+      console.error('Error resetting password:', error);
+      setPasswordError('Error resetting password. Please try again later.');
     }
   };
 
   const handleInputChange = (e) => {
-    setEmail(e.target.value);
+    setPassword(e.target.value);
   };
 
   return (
@@ -49,16 +46,16 @@ function Login() {
                       <form>
                         <div className="d-flex align-items-center mb-3 pb-1">
                           <img src={Logo} alt="Logo" className="img-fluid" style={{ width: "70px", height: "70px", marginRight: "10px" }} />
-                          <span className="h1 fw-bold mb-0">Forgot Password?</span>
+                          <span className="h1 fw-bold mb-0">Reset Password</span>
                         </div>
                         <div data-mdb-input-init className="form-outline mb-4">
-                          <input type="email" id="form2Example17" className="form-control form-control-lg" name="email" value={email} onChange={handleInputChange} placeholder="Email address" />
-                          <label className="form-label" htmlFor="form2Example17">Email address</label>
+                          <input type="password" id="form2Example17" className="form-control form-control-lg" name="password" value={password} onChange={handleInputChange} placeholder="New Password" />
+                          <label className="form-label" htmlFor="form2Example17">New Password</label>
                         </div>
                         <div className="pt-1 mb-4">
-                          <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="button" onClick={handleForgotPassword}>Send</button>
+                          <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="button" onClick={handleResetPassword}>Reset Password</button>
                         </div>
-                        {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
+                        {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
                         <Link to="/login" className="small text-muted">Back to Login</Link>
                       </form>
                     </div>
@@ -73,4 +70,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ResetPassword;
