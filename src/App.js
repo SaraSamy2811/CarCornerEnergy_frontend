@@ -17,9 +17,14 @@ import UserInterface from './components/USER/UserInterface';
 import AdminInterface from './components/ADMIN/AdminInterface'
 import Review from './components/USER/Pages/Review';
 import ForgotPassword from './components/VISITOR/Pages/ForgotPassword';
+<<<<<<< HEAD
 import Dashbord from './components/ADMIN/Pages/Dashbord';
 import ManageUsers from './components/ADMIN/Pages/ManageUsers';
 import ManageStations from './components/ADMIN/Pages/ManageStations';
+=======
+import ResetPassword from './components/VISITOR/Pages/ResetPassword';
+import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
+>>>>>>> 4a6c6851cd22ba18b0512e45330588895cf33125
 
 
 function App() {
@@ -34,6 +39,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
+            <Route path="/verifyResetCode" element={<VerifyResetCode/>} />
+
+
 
           </Route>
 

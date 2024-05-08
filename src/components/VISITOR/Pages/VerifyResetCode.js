@@ -1,36 +1,33 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../css/Login.css';
-// import LoginImage from '../../../assets/images/pexels-photo-12205370.jpeg';
 import LoginImage from '../../../assests/imges/pexels-photo-12205370.jpeg';
-// import Logo from '../../../assets/images/logo2.png';
-import Logo from '../../../assests/imges/logo2.png'
+import Logo from '../../../assests/imges/logo2.png';
+import '../css/Login.css';
 
+function VerifyResetCode() {
+  const [resetCode, setCode] = useState('');
+  const [codeError, setCodeError] = useState('');
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-
-  const handleForgotPassword = async () => {
-    if (!email) {
-      setEmailError('Please enter your email address.');
+  const handleVerifyCode = async () => {
+    if (!resetCode) {
+      setCodeError('Please enter the verification code.');
       return;
     }
 
     try {
-      const response = await axios.post('/api/v1/auth/forgotPassword', { email });
-      console.log('Forgot password request successful:', response);
-      alert('Password reset email sent successfully!');
-      window.location.href = "./VerifyResetCode";
+      const response = await axios.post('/api/v1/auth/verifyResetCode', { resetCode});
+      console.log('Code verification successful:', response);
+      alert('Code verified successfully!');
+      window.location.href = "./ResetPassword";
     } catch (error) {
-      console.error('Error sending password reset request:', error);
-      setEmailError('Error sending password reset request. Please try again later.');
+      console.error('Error verifying code:', error);
+      setCodeError('Error verifying code. Please try again later.');
     }
   };
 
   const handleInputChange = (e) => {
-    setEmail(e.target.value);
+    setCode(e.target.value);
   };
 
   return (
@@ -49,17 +46,17 @@ function Login() {
                       <form>
                         <div className="d-flex align-items-center mb-3 pb-1">
                           <img src={Logo} alt="Logo" className="img-fluid" style={{ width: "70px", height: "70px", marginRight: "10px" }} />
-                          <span className="h1 fw-bold mb-0">Forgot Password?</span>
+                          <span className="h1 fw-bold mb-0">Verify Reset Code</span>
                         </div>
                         <div data-mdb-input-init className="form-outline mb-4">
-                          <input type="email" id="form2Example17" className="form-control form-control-lg" name="email" value={email} onChange={handleInputChange} placeholder="Email address" />
-                          <label className="form-label" htmlFor="form2Example17">Email address</label>
+                          <input type="text" id="form2Example17" className="form-control form-control-lg" name="code" value={resetCode} onChange={handleInputChange} placeholder="Verification code" />
+                          <label className="form-label" htmlFor="form2Example17">Verification code</label>
                         </div>
                         <div className="pt-1 mb-4">
-                          <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="button" onClick={handleForgotPassword}>Send</button>
+                          <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="button" onClick={handleVerifyCode}>Verify Code</button>
                         </div>
-                        {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
-                        <Link to="/login" className="small text-muted">Back to Login</Link>
+                        {codeError && <p style={{ color: 'red' }}>{codeError}</p>}
+                        <Link to="/reset-password" className="small text-muted">Reset Password</Link>
                       </form>
                     </div>
                   </div>
@@ -73,4 +70,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default VerifyResetCode;

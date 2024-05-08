@@ -12,7 +12,8 @@ const Offers = () => {
   const [paymentMethod, setPaymentMethod] = useState('cash'); // Default payment method
   const [paymentData, setPaymentData] = useState({
     nameOnCard: '',
-    cardNumber: '',
+    
+creditCardNumber: '',
     expiration: '',
     cvv: ''
   });
@@ -34,45 +35,46 @@ const Offers = () => {
   
   const handlePromoCodeSubmit = async () => {
     if (!promoCode) {
-      setPromoCodeError('Please fill promo code.');
-      return;
+        setPromoCodeError('Please fill promo code.');
+        return;
     }
-  
+
     try {
-      const response = await axios.get(`/api/v1/coupons/${promoCode}`);
-      
-      if (response.status >= 200 && response.status < 300) {
-        alert('PromoCode successful!');
-        // Handle further actions upon successful promo code verification
-      } else {
-        const errorMessage = response.data.msg || 'An error occurred while sending the promoCode.';
-        setPromoCodeError(errorMessage);
-      }
+        const response = await axios.get(`/api/v1/coupons/${promoCode}`);
+
+        if (response.status >= 200 && response.status < 300) {
+            alert('PromoCode successful!');
+            // Handle further actions upon successful promo code verification
+        } else {
+            const errorMessage = response.data.msg || 'An error occurred while sending the promoCode.';
+            setPromoCodeError(errorMessage);
+        }
     } catch (error) {
-      if (error.response) {
-        const errorMessage = error.response.data.msg || 'An error occurred while sending the promoCode.';
-        setPromoCodeError(errorMessage);
-      } else if (error.request) {
-        setPromoCodeError('No response received from the server.');
-      } else {
-        setPromoCodeError('An error occurred while processing the request.');
-      }
+        if (error.response) {
+            const errorMessage = error.response.data.msg || 'An error occurred while sending the promoCode.';
+            setPromoCodeError(errorMessage);
+        } else if (error.request) {
+            setPromoCodeError('No response received from the server.');
+        } else {
+            setPromoCodeError('An error occurred while processing the request.');
+        }
     }
-  };
+};
+
 
   const handlePaymentSubmit = async () => {
-    const { nameOnCard, cardNumber, expiration, cvv } = paymentData;
-    if (paymentMethod === 'visa' && (!nameOnCard || !cardNumber || !expiration || !cvv)) {
-      setPaymentError('Please fill all payment fields.');
-      return;
-    }
+    const { nameOnCard, creditCardNumber, expiration, cvv } = paymentData;
+    // if (paymentMethod === 'visa' && (!nameOnCard || !creditCardNumber || !expiration || !cvv)) {
+    //   setPaymentError('Please fill all payment fields.');
+    //   return;
+    // }
     try {
       const response = await axios.post('/api/v1/payment/choose', paymentData)
     
       if (response.status >= 200 && response.status < 300) {
         alert('payment successful!');
       } else {
-        const errorMessage = response.data.error || 'An error occurred while payment.';
+        const errorMessage = response.data.error || ' payment.';
         setPromoCodeError(errorMessage);
       } 
     } catch (error) {

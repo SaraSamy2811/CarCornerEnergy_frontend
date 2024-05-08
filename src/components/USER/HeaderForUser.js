@@ -3,11 +3,26 @@ import { Link } from 'react-router-dom';
 import Logo from "../../assests/imges/logo.png";
 // Initialization for ES Users
 import { Collapse, Ripple, initMDB } from "mdb-ui-kit";
+import axios from 'axios';
+
 
 initMDB({ Collapse, Ripple });
 
 
 function HeaderForUser() {
+    const handleLogout = async () => {
+        const confirmed = window.confirm('Are you sure you want to logout?');
+        if (confirmed) {
+            try {
+                await axios.post('/api/v1/auth/logout');
+                
+                window.location.href = '/Home'; 
+            } catch (error) {
+                console.error('Error logging out:', error);
+                
+            }
+        }
+    };
     return (
         <div>
 
@@ -71,9 +86,9 @@ function HeaderForUser() {
     </Link>
 </div>
 
-<button type="button" className="btn btn-warning me-3">
-                                Logout
-                            </button>
+<button type="button" className="btn btn-warning me-3" onClick={handleLogout}>
+            Logout
+        </button>
                             
 
         
