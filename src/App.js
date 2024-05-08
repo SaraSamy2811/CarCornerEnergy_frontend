@@ -17,6 +17,9 @@ import UserInterface from './components/USER/UserInterface';
 import AdminInterface from './components/ADMIN/AdminInterface'
 import Review from './components/USER/Pages/Review';
 import ForgotPassword from './components/VISITOR/Pages/ForgotPassword';
+import Dashbord from './components/ADMIN/Pages/Dashbord';
+import ManageUsers from './components/ADMIN/Pages/ManageUsers';
+import ManageStations from './components/ADMIN/Pages/ManageStations';
 
 
 function App() {
@@ -43,8 +46,10 @@ function App() {
             <Route path="/user/review" element={<Review />} /> 
           </Route>
 
-          <Route element={<AdminInterface/>}>
-            {/* Add admin routes here if needed */}
+          <Route path='/Admin' element={<AdminInterface/>}>
+            <Route index element={<Dashbord/>}/>
+            <Route path="/Admin/ManageUsers" element={<ManageUsers />} />
+            <Route path="/Admin/ManageStations" element={<ManageStations />} />
           </Route>
         </Routes>
     
