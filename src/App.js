@@ -8,7 +8,7 @@ import Offers from './components/USER/Pages/Offers';
 import MapComponent from './components/USER/MapComponent/MapComponent';
 import HomeForUser from './components/USER/Pages/HomeForUser';
 import ContactUs from './components/VISITOR/Pages/ContactUs';
-import About from './pages/About'
+import About from './components/VISITOR/Pages/About'
 import Profile from './components/USER/Pages/Profile';
 import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPrediction'
 import VisitorInterface from './components/VISITOR/VisitorInterface';
@@ -40,7 +40,7 @@ function App() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/verifyResetCode" element={<VerifyResetCode/>} />
-            <Route path="/FAQ" element={<FAQ/>}/>
+            <Route path="/freqentlyaskedquestions" element={<FAQ/>}/>
             <Route path="/about" element={<About/>}/>
           </Route>
 
