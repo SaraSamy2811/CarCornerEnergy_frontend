@@ -20,15 +20,10 @@ import ForgotPassword from './components/VISITOR/Pages/ForgotPassword';
 import Dashbord from './components/ADMIN/Pages/Dashbord';
 import ManageUsers from './components/ADMIN/Pages/ManageUsers';
 import ManageStations from './components/ADMIN/Pages/ManageStations';
-<<<<<<< HEAD
-import ResetPassword from './components/VISITOR/Pages/ResetPassword';
-import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
-=======
 import FAQ from './components/VISITOR/Pages/FAQ';
 import ResetPassword from './components/VISITOR/Pages/ResetPassword';
 import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
 import EiditProfile from './components/USER/Pages/EiditProfile';
->>>>>>> bcbf7c9f4c9f19a0a74382f2cce61a5fc4a43252
 
 
 function App() {
@@ -72,7 +67,3 @@ function App() {
 
 
 export default App;
-
-
-
-
