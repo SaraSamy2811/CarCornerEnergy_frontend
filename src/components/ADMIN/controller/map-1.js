@@ -1,9 +1,5 @@
-// 
-
-
-
 import React from 'react';
-import jsVectorMap from 'jsvectormap'; // Install the 'jsvectormap' package
+import  '../../../../node_modules/jsvectormap'; // Install the 'jsvectormap' package
 
 const MyWorldMap1 = () => {
   const mapOptions = {

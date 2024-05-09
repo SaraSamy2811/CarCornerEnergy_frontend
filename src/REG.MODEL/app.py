@@ -28,7 +28,7 @@ def predict():
         
         # Check if distance is 0
         if distance == 0:
-            return render_template('C:\Users\YOMNA\Documents\projects\CarCornerEnergy_frontend\src\REG.MODEL\result.html', energy_consumption=0)
+            return render_template('C:\Users\YOMNA\Documents\projects\CarCornerEnergy_frontend\src\REG.MODEL\Result.js', energy_consumption=0)
         
         # Lookup data for the provided make and model
         user_input_data = df[(df['Make'] == make) & (df['Model'] == model_name)].iloc[0]
@@ -65,7 +65,7 @@ def predict():
         # Round to two decimal places
         energy_consumption = round(energy_consumption, 2)
 
-        return render_template('C:\Users\YOMNA\Documents\projects\CarCornerEnergy_frontend\src\REG.MODEL\result.html', energy_consumption=energy_consumption)
+        return render_template('C:\Users\YOMNA\Documents\projects\CarCornerEnergy_frontend\src\REG.MODEL\Result.js', energy_consumption=energy_consumption)
 
 if __name__ == '__main__':
     app.run(debug=True)
