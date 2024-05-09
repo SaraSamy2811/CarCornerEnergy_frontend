@@ -26,7 +26,7 @@ function Footer() {
           </ul>
         </div>
           <div className='footerBottom'>
-            <p>copyright &copy; 2024; designend by <span className='designer'>Yomna</span></p>
+            <p>copyright &copy; 2024; designend by <span className='designer'>//</span></p>
           </div>
 
 
