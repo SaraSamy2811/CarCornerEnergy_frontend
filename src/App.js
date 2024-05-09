@@ -8,7 +8,7 @@ import Offers from './components/USER/Pages/Offers';
 import MapComponent from './components/USER/MapComponent/MapComponent';
 import HomeForUser from './components/USER/Pages/HomeForUser';
 import ContactUs from './components/VISITOR/Pages/ContactUs';
-//import About from './pages/About'
+import About from './pages/About'
 import Profile from './components/USER/Pages/Profile';
 import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPrediction'
 import VisitorInterface from './components/VISITOR/VisitorInterface';
@@ -17,14 +17,13 @@ import UserInterface from './components/USER/UserInterface';
 import AdminInterface from './components/ADMIN/AdminInterface'
 import Review from './components/USER/Pages/Review';
 import ForgotPassword from './components/VISITOR/Pages/ForgotPassword';
-<<<<<<< HEAD
 import Dashbord from './components/ADMIN/Pages/Dashbord';
 import ManageUsers from './components/ADMIN/Pages/ManageUsers';
 import ManageStations from './components/ADMIN/Pages/ManageStations';
-=======
+import FAQ from './components/VISITOR/Pages/FAQ';
 import ResetPassword from './components/VISITOR/Pages/ResetPassword';
 import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
->>>>>>> 4a6c6851cd22ba18b0512e45330588895cf33125
+import EiditProfile from './components/USER/Pages/EiditProfile';
 
 
 function App() {
@@ -41,9 +40,8 @@ function App() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/verifyResetCode" element={<VerifyResetCode/>} />
-
-
-
+            <Route path="/FAQ" element={<FAQ/>}/>
+            <Route path="/about" element={<About/>}/>
           </Route>
 
           <Route path="/user"  element={<UserInterface/>}>
@@ -51,6 +49,7 @@ function App() {
             <Route path="/user/offers" element={<Offers />} />
             <Route path="/user/map" element={<MapComponent />} />
             <Route path="/user/profile" element={<Profile />} />
+            <Route path="/user/EiditProfile" element={<EiditProfile />} />
             <Route path="/user/EnergyConsumptionPrediction" element={<EnergyConsumptionPrediction />} />
             <Route path="/user/review" element={<Review />} /> 
           </Route>
