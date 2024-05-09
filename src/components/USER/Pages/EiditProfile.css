@@ -1,0 +1,125 @@
+body {
+    background-color: #aaaeb9 !important;
+    background-image: none !important;
+  
+  }
+  
+  .edit-profile-container {
+    
+    width: 350px;
+    max-height: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    /* Light gray background */
+    color: #333;
+    /* Dark gray text color */
+    border-radius: 9px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
+    text-align: center;
+  }
+  
+  .form-group {
+    font-family: fantasy;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .label-visible {
+    display: block;
+    margin-bottom: 8px;
+    text-align: left !important;
+  }
+  
+  .label-hidden {
+    display: none;
+  }
+  
+  .icon {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"] {
+    width: 92%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    /* Light gray border */
+    background-color: #fff;
+    /* White background for input */
+    color: #333;
+    /* Dark gray text color */
+    margin-top: 5px;
+    transition: border-color 0.3s ease;
+    /* Smooth transition on hover */
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  input[type="tel"]:focus {
+    border-color: #2f80ed;
+    /* Blue border on focus */
+  }
+  
+  .car-type-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    /* Light gray border */
+    background-color: #fff;
+    /* White background for input */
+    color: #333;
+    /* Dark gray text color */
+    margin-top: 5px;
+    transition: border-color 0.3s ease;
+    /* Smooth transition on hover */
+  }
+  
+  .car-type-select:focus {
+    border-color: #2f80ed;
+    /* Blue border on focus */
+  }
+  
+  .button-container {
+    text-align: center;
+    /* Center the buttons */
+  }
+  h2{
+  font-family: fantasy;
+  
+  
+  }
+  button {
+  
+    padding: 12px 20px;
+    background-color: #2f80ed;
+    /* Blue button color */
+    color: #fff;
+    /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    /* Smooth transition on hover */
+    
+  }
+  
+  button:hover {
+    background-color: #2b68b0;
+    /* Darker blue on hover */
+  }
+  
+  .custom-background{
+    
+    overflow: hidden;
+    /* background-image: url('./businessman-suit-holding-out-hand-icon-user-internet-icons-interface-foreground-global-network-media-conceptcontact-virtual-screens-copy-spaceneon-bannerpurple-blue-light_150455-21112\ \(1\).jpg'); */
+    background-size: cover;
+  }

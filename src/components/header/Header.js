@@ -30,7 +30,10 @@ const Header = () => {
           <Link className="nav-link active" to="/home">Home</Link> {/* Use Link component for Home */}
           </li>
           <li className="nav-item">
-          <Link className="nav-link" to="/map">Map</Link> Use Link component for Map
+          <Link className="nav-link" to="/about">About</Link> 
+          </li>
+          <li className="nav-item">
+          <Link className="nav-link" to="/freqentlyaskedquestions">FAQ</Link> 
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="google.com" role="button" data-bs-toggle="dropdown" aria-expanded="false">

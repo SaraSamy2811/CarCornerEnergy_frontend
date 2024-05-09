@@ -51,14 +51,22 @@ const handleLogin = async () => {
 
       // Redirect to HomeForUser page upon successful login
       
-      alert('Login successful!,,Happy to see you again use promocode(promo5)');
+      //alert('Login successful!,,Happy to see you again use promocode(promo5)');
       // window.location.href = './HomeForUser';
-     
+      if (email === 'admin011@gmail.com') {
+      // If the user role is admin, redirect to the admin page
+        // إذا كان دور المستخدم هو admin، قم بتوجيهه إلى صفحة الـ admin
+        window.location.href = './ADMIN';
+      } else {
+        // إذا كان دور المستخدم ليس admin، قم بتوجيهه إلى صفحة الـ user
+       
+      
       // Display error message
       // setEmailError('Invalid email or password');
       // setPasswordError('Invalid email or password');
       alert('Login successful!,,Happy to see you again use promocode(promo5)');
       window.location.href = "./USER";
+    }
     
   } catch (error) {
     console.error('Error logging in:', error);

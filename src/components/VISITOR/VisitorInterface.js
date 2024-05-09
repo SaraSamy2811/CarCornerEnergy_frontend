@@ -8,6 +8,9 @@ import Register from './Pages/Register'
 import ContactUs from './Pages/ContactUs'
 import ForgotPassword from './Pages/ForgotPassword'
 import About from './Pages/About'
+import FAQ from './Pages/FAQ'
+import ResetPassword from './Pages/ResetPassword'
+import VerifyResetCode from './Pages/VerifyResetCode'
 
 
 
@@ -21,8 +24,10 @@ export default function Visitor() {
             <Register/>
             <ContactUs/>
             <ForgotPassword/>
+            <ResetPassword/>
+            <VerifyResetCode/>
+            <FAQ/>
             <About/>
-
         </Outlet>
         <Footer/>
 

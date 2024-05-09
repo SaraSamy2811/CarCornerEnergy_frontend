@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Background from '../../../assests/imges/background.jpg';
+import { Link } from 'react-router-dom';
 // import '../css/Home.css';
 
 function Profile() {
@@ -134,6 +135,7 @@ function Profile() {
                     </div>
                   </div>
                   {/* <button onClick={updateUserProfile}>Update Profile</button> */}
+                  <Link to="/user/EiditProfile">Update Profile</Link>
                 </div>
               </div>
             </div>

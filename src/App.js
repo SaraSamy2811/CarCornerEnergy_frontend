@@ -8,7 +8,7 @@ import Offers from './components/USER/Pages/Offers';
 import MapComponent from './components/USER/MapComponent/MapComponent';
 import HomeForUser from './components/USER/Pages/HomeForUser';
 import ContactUs from './components/VISITOR/Pages/ContactUs';
-//import About from './pages/About'
+import About from './components/VISITOR/Pages/About'
 import Profile from './components/USER/Pages/Profile';
 import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPrediction'
 import VisitorInterface from './components/VISITOR/VisitorInterface';
@@ -20,8 +20,15 @@ import ForgotPassword from './components/VISITOR/Pages/ForgotPassword';
 import Dashbord from './components/ADMIN/Pages/Dashbord';
 import ManageUsers from './components/ADMIN/Pages/ManageUsers';
 import ManageStations from './components/ADMIN/Pages/ManageStations';
+<<<<<<< HEAD
 import ResetPassword from './components/VISITOR/Pages/ResetPassword';
 import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
+=======
+import FAQ from './components/VISITOR/Pages/FAQ';
+import ResetPassword from './components/VISITOR/Pages/ResetPassword';
+import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
+import EiditProfile from './components/USER/Pages/EiditProfile';
+>>>>>>> bcbf7c9f4c9f19a0a74382f2cce61a5fc4a43252
 
 
 function App() {
@@ -38,9 +45,8 @@ function App() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/resetPassword" element={<ResetPassword />} />
             <Route path="/verifyResetCode" element={<VerifyResetCode/>} />
-
-
-
+            <Route path="/freqentlyaskedquestions" element={<FAQ/>}/>
+            <Route path="/about" element={<About/>}/>
           </Route>
 
           <Route path="/user"  element={<UserInterface/>}>
@@ -48,6 +54,7 @@ function App() {
             <Route path="/user/offers" element={<Offers />} />
             <Route path="/user/map" element={<MapComponent />} />
             <Route path="/user/profile" element={<Profile />} />
+            <Route path="/user/EiditProfile" element={<EiditProfile />} />
             <Route path="/user/EnergyConsumptionPrediction" element={<EnergyConsumptionPrediction />} />
             <Route path="/user/review" element={<Review />} /> 
           </Route>

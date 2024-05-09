@@ -7,6 +7,7 @@ import MapComponent from './MapComponent/MapComponent'
 import HomeForUser from './Pages/HomeForUser'
 import HeaderForUser from './HeaderForUser'
 import Review from './Pages/Review'
+import EiditProfile from './Pages/EiditProfile'
 
 export default function UserInterface() {
   return (
@@ -14,6 +15,7 @@ export default function UserInterface() {
       <HeaderForUser/>
       <Outlet>
         <Profile/>
+        <EiditProfile/>
         <Offers/>
         <HomeForUser/>
         <MapComponent/>
