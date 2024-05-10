@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiOutlineUser, AiOutlineMail, AiOutlineLock, AiOutlinePhone } from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineMail, AiOutlinePhone } from 'react-icons/ai';
 import { BsFillCaretDownFill } from 'react-icons/bs';
 import './EiditProfile.css'; // import CSS file for styling
 import axios from 'axios';
