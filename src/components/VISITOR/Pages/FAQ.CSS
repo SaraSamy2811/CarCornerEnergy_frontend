@@ -88,10 +88,3 @@
       font-size: 0.9rem;
     }
   }
-  .page-content {
-    margin-top: 50px; 
-}
-.faq-section {
-    margin-top: 50px; /* تعيين الهامش العلوي بقيمة 20 بكسل */
-    margin-bottom: 20px; /* تعيين الهامش السفلي بقيمة 20 بكسل */
-  }

@@ -4,8 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "bootstrap";
-import 'apexcharts';
-import 'bs-brain';
 import "./assests/Francois_One/FrancoisOne-Regular.ttf"
 import '@fortawesome/fontawesome-free/css/all.css';
 import { BrowserRouter } from 'react-router-dom';

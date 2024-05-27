@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './FAQ.CSS';
+import './FAQ.css';
 
 const Freqasked = () => {
 
@@ -13,7 +13,7 @@ const Freqasked = () => {
   };
 
   return (
-    <div className="faq-section" style={{ marginTop: '20%', marginBottom: '20px' }}>
+    <div className="faq-section" >
    
 
 <div class="faq-section">

@@ -24,6 +24,7 @@ import FAQ from './components/VISITOR/Pages/FAQ';
 import ResetPassword from './components/VISITOR/Pages/ResetPassword';
 import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
 import EiditProfile from './components/USER/Pages/EiditProfile';
+import Model from './REG.MODEL/Model';
 
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
             <Route path="/user/map" element={<MapComponent />} />
             <Route path="/user/profile" element={<Profile />} />
             <Route path="/user/EiditProfile" element={<EiditProfile />} />
-            <Route path="/user/EnergyConsumptionPrediction" element={<EnergyConsumptionPrediction />} />
+            <Route path="/user/EnergyConsumptionPrediction" element={<Model />} />
             <Route path="/user/review" element={<Review />} /> 
           </Route>
 
@@ -67,7 +68,3 @@ function App() {
 
 
 export default App;
-
-
-
-
