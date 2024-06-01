@@ -62,7 +62,7 @@ function  Dashbord() {
         </div>
 
         <div className='main-cards'>
-            <div className='card' style={{ backgroundColor: 'var(--color-dark)' ,color: '#FFFFFF' }}>
+            <div className='card-dashbord' style={{ backgroundColor: 'var(--color-dark)' ,color: '#FFFFFF' }}>
                 <div className='card-inner'>
                     <h3>COUPONES</h3>
                     <BsFillArchiveFill className='card_icon'/>
