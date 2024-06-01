@@ -25,6 +25,7 @@ import ResetPassword from './components/VISITOR/Pages/ResetPassword';
 import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
 import EiditProfile from './components/USER/Pages/EiditProfile';
 import Model from './REG.MODEL/Model';
+import AdminProfile from './components/ADMIN/Pages/AdminProfile';
 
 
 function App() {
@@ -59,6 +60,8 @@ function App() {
             <Route index element={<Dashbord/>}/>
             <Route path="/Admin/ManageUsers" element={<ManageUsers />} />
             <Route path="/Admin/ManageStations" element={<ManageStations />} />
+            <Route path="/Admin/adminprofile" element={<AdminProfile />} />
+            
           </Route>
         </Routes>
     

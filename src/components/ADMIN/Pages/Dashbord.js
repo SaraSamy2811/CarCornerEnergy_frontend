@@ -1,562 +1,146 @@
 import React from 'react'
-//import MyCalender from '../controller/calendar-1'
-import Chart1 from '../controller/chart-1'
-//import Chart2 from '../controller/chart-2'
-import Chart3 from '../controller/chart-3'
-import Chart4 from '../controller/chart-4'
-//import Map1 from '../controller/map-1'
-//import Map2 from '../controller/map-2'
-//import MyForm from '../controller/bs-form-validation'
+import 
+{ BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
+ from 'react-icons/bs'
+ import 
+ { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
+ from 'recharts';
+import FooterAdmin from '../FooterAdmin';
 
+function  Dashbord() {
 
-function Dashbord() {
+    const data = [
+        {
+          name: 'Page A',
+          uv: 4000,
+          pv: 2400,
+          amt: 2400,
+        },
+        {
+          name: 'Page B',
+          uv: 3000,
+          pv: 1398,
+          amt: 2210,
+        },
+        {
+          name: 'Page C',
+          uv: 2000,
+          pv: 9800,
+          amt: 2290,
+        },
+        {
+          name: 'Page D',
+          uv: 2780,
+          pv: 3908,
+          amt: 2000,
+        },
+        {
+          name: 'Page E',
+          uv: 1890,
+          pv: 4800,
+          amt: 2181,
+        },
+        {
+          name: 'Page F',
+          uv: 2390,
+          pv: 3800,
+          amt: 2500,
+        },
+        {
+          name: 'Page G',
+          uv: 3490,
+          pv: 4300,
+          amt: 2100,
+        },
+      ];
+     
+
   return (
-    <div>
-       
-
-  {/* <!-- Main --> */}
-  <main id="main">
-
-    {/* <!-- Section - Bootstrap Brain Component --> */}
-    {/* <!-- Breadcrumb --> */}
-    <section class="py-3 py-md-4 py-xl-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1 class="h4">Electric Cars Dashboard</h1>
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb m-0 fs-7">
-                <li class="breadcrumb-item"><a class="link-primary text-decoration-none" href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-              </ol>
-            </nav>
-          </div>
+    <main className='main-container'>
+        <div className='main-title'>
+            <h3>DASHBOARD</h3>
         </div>
-      </div>
-    </section>
-{/* 
-    <!-- Section - Bootstrap Brain Component -->
-    
-    <!-- Card 1 - Bootstrap Brain Component --> */}
-    <div>
-      
-    <section class="pb-3 pb-md-4 pb-xl-5 bg-light"  >
-      <div class="container">
-        <div class="row gy-3 gy-md-4">
-          <div class="col-12 col-sm-6 col-xl-3">
-            <div class="card widget-card border-light shadow-sm">
-              <div class="card-body p-4">
-                <div class="row">
-                  <div class="col-8">
-                    <h5 class="card-title widget-card-title mb-3">Stations</h5>
-                    <h4 class="card-subtitle text-body-secondary m-0">46</h4>
-                  </div>
-                  <div class="col-4">
-                    <div class="d-flex justify-content-end">
-                      <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-truck fs-4"></i>
-                      </div>
-                    </div>
-                  </div>
+
+        <div className='main-cards'>
+            <div className='card' style={{ backgroundColor: 'var(--color-dark)' ,color: '#FFFFFF' }}>
+                <div className='card-inner'>
+                    <h3>COUPONES</h3>
+                    <BsFillArchiveFill className='card_icon'/>
                 </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="d-flex align-items-center mt-3">
-                      <span class="lh-1 me-3 bg-danger-subtle text-danger rounded-circle p-1 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-arrow-right-short bsb-rotate-45"></i>
-                      </span>
-                      <div>
-                        <p class="fs-7 mb-0">-9%</p>
-                        <p class="fs-7 mb-0 text-secondary">since last week</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <h1>300</h1>
             </div>
-          </div>
-          <div class="col-12 col-sm-6 col-xl-3">
-            <div class="card widget-card border-light shadow-sm">
-              <div class="card-body p-4">
-                <div class="row">
-                  <div class="col-8">
-                    <h5 class="card-title widget-card-title mb-3">Coupons</h5>
-                    <h4 class="card-subtitle text-body-secondary m-0">896</h4>
-                  </div>
-                  <div class="col-4">
-                    <div class="d-flex justify-content-end">
-                      <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-currency-dollar fs-4"></i>
-                      </div>
-                    </div>
-                  </div>
+            <div className='card' style={{ backgroundColor: 'var(--color-primary)' }}>
+                <div className='card-inner'>
+                    <h3>STAIONS</h3>
+                    <BsFillGrid3X3GapFill className='card_icon'/>
                 </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="d-flex align-items-center mt-3">
-                      <span class="lh-1 me-3 bg-success-subtle text-success rounded-circle p-1 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-arrow-right-short bsb-rotate-n45"></i>
-                      </span>
-                      <div>
-                        <p class="fs-7 mb-0">+26%</p>
-                        <p class="fs-7 mb-0 text-secondary">since last week</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <h1>12</h1>
             </div>
-          </div>
-          <div class="col-12 col-sm-6 col-xl-3">
-            <div class="card widget-card border-light shadow-sm">
-              <div class="card-body p-4">
-                <div class="row">
-                  <div class="col-8">
-                    <h5 class="card-title widget-card-title mb-3">Visitors</h5>
-                    <h4 class="card-subtitle text-body-secondary m-0">3,764</h4>
-                  </div>
-                  <div class="col-4">
-                    <div class="d-flex justify-content-end">
-                      <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-person fs-4"></i>
-                      </div>
-                    </div>
-                  </div>
+            <div className='card' style={{ backgroundColor: 'var(--color-darker)',color: '#FFFFFF' }}>
+                <div className='card-inner'>
+                    <h3>USERS</h3>
+                    <BsPeopleFill className='card_icon'/>
                 </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="d-flex align-items-center mt-3">
-                      <span class="lh-1 me-3 bg-success-subtle text-success rounded-circle p-1 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-arrow-right-short bsb-rotate-n45"></i>
-                      </span>
-                      <div>
-                        <p class="fs-7 mb-0">+69%</p>
-                        <p class="fs-7 mb-0 text-secondary">since last week</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <h1>33</h1>
             </div>
-          </div>
-          <div class="col-12 col-sm-6 col-xl-3">
-            <div class="card widget-card border-light shadow-sm">
-              <div class="card-body p-4">
-                <div class="row">
-                  <div class="col-8">
-                    <h5 class="card-title widget-card-title mb-3">Users</h5>
-                    <h4 class="card-subtitle text-body-secondary m-0">455</h4>
-                  </div>
-                  <div class="col-4">
-                    <div class="d-flex justify-content-end">
-                      <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-cart fs-4"></i>
-                      </div>
-                    </div>
-                  </div>
+            <div className='card'style={{ backgroundColor: 'var(--color-light)' }}>
+                <div className='card-inner'>
+                    <h3>ALERTS</h3>
+                    <BsFillBellFill className='card_icon'/>
                 </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="d-flex align-items-center mt-3">
-                      <span class="lh-1 me-3 bg-danger-subtle text-danger rounded-circle p-1 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-arrow-right-short bsb-rotate-45"></i>
-                      </span>
-                      <div>
-                        <p class="fs-7 mb-0">+50%</p>
-                        <p class="fs-7 mb-0 text-secondary">since last week</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <h1>42</h1>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
-    </div>
-{/* 
-    <!-- Section - Bootstrap Brain Component --> */}
-    <section class="pb-3 pb-md-4 pb-xl-5 bg-light">
-      <div class="container">
-        <div class="row gy-3 gy-md-4">
-          <div class="col-12 col-lg-6 col-xl-7">
-            {/* <!-- Chart 1 - Bootstrap Brain Component --> */}
-            <div class="card widget-card border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
-                  <div class="mb-3 mb-sm-0">
-                    <h5 class="card-title widget-card-title">Visiting Overview</h5>
-                  </div>
-                  <div>
-                    <select class="form-select text-secondary border-light-subtle">
-                      <option value="1">March 2023</option>
-                      <option value="2">April 2023</option>
-                      <option value="3">May 2023</option>
-                      <option value="4">June 2023</option>
-                    </select>
-                  </div>
-                </div>
-                <div id="bsb-chart-1"><Chart1/></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-6 col-xl-5">
-            {/* <!-- Chart 4 - Bootstrap Brain Component --> */}
-            <div class="card widget-card border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
-                  <div class="mb-3 mb-sm-0">
-                    <h5 class="card-title widget-card-title">Browsers</h5>
-                  </div>
-                  <div>
-                    <select class="form-select text-secondary border-light-subtle">
-                      <option value="1">March 2023</option>
-                      <option value="2">April 2023</option>
-                      <option value="3">May 2023</option>
-                      <option value="4">June 2023</option>
-                    </select>
-                  </div>
-                </div>
-                <div id="bsb-chart-4"><Chart4/></div>
-              </div>
-            </div>
-          </div>
+
+        <div className='charts'>
+            <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+            }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pv" fill="#8884d8" />
+                <Bar dataKey="uv" fill="#82ca9d" />
+                </BarChart>
+            </ResponsiveContainer>
+
+            <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                width={500}
+                height={300}
+                data={data}
+                margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+                >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                </LineChart>
+            </ResponsiveContainer>
+
+            <ResponsiveContainer><FooterAdmin/> </ResponsiveContainer>
+        
         </div>
-      </div>
-    </section>
-
-    {/* <!-- Section - Bootstrap Brain Component --> */}
-    <section class="pb-3 pb-md-4 pb-xl-5 bg-light">
-      <div class="container">
-        <div class="row gy-3 gy-md-4">
-          <div class="col-12 col-lg-6 col-xl-5">
-            {/* <!-- Timeline 8 - Bootstrap Brain Component --> */}
-            <div class="card widget-card bsb-timeline-8 border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <h5 class="card-title widget-card-title mb-3">Recent Transactions</h5>
-
-                <ul class="timeline">
-                  <li class="timeline-item">
-                    <div class="timeline-body">
-                      <div class="timeline-meta">
-                        <span>32 minutes</span>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                        <h6 class="mb-1">Amount received in the PayPal gateway.</h6>
-                        <span class="text-secondary fs-7">User: William Lucas</span>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item">
-                    <div class="timeline-body">
-                      <div class="timeline-meta">
-                        <span>49 minutes</span>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                        <h6 class="mb-1">New sale recorded in the Bootstrap admin templates.</h6>
-                        <span class="text-secondary fs-7">Product: Console</span>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="timeline-item">
-                    <div class="timeline-body">
-                      <div class="timeline-meta">
-                        <span>2 hours</span>
-                      </div>
-                      <div class="timeline-content timeline-indicator">
-                        <h6 class="mb-1">User registered in the discount campaign.</h6>
-                        <span class="text-secondary fs-7">Country: United States</span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-6 col-xl-7">
-            {/* <!-- Map 2 - Bootstrap Brain Component --> */}
-            <div class="card widget-card border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
-                  <div class="mb-2 mb-sm-0">
-                    <h5 class="card-title widget-card-title m-0">Global Sales Overview</h5>
-                  </div>
-                  <div>
-                    <span class="text-secondary fs-7">Last updated: 7 days ago</span>
-                  </div>
-                </div>
-                <div id="bsb-map-2" class="bsb-jvm-zoom-btn"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* <!-- Section - Bootstrap Brain Component --> */}
-    <section class="pb-3 pb-md-4 pb-xl-5 bg-light">
-      <div class="container">
-        <div class="row gy-3 gy-md-4">
-          <div class="col-12 col-lg-6 col-xl-7">
-            {/* <!-- Chart 3 - Bootstrap Brain Component --> */}
-            <div class="card widget-card border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <h5 class="card-title widget-card-title mb-3">Device Stats</h5>
-                <div id="bsb-chart-3"><Chart3/></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-6 col-xl-5">
-            {/* <!-- Card 2 - Bootstrap Brain Component --> */}
-            <div class="card widget-card border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <h5 class="card-title widget-card-title mb-4">Payment Overview</h5>
-                <div class="row gy-4">
-                  <div class="col-12">
-                    <div class="row align-items-center">
-                      <div class="col-8">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
-                              <i class="bi bi-paypal"></i>
-                            </div>
-                          </div>
-                          <div>
-                            <h6 class="m-0">PayPal</h6>
-                            <p class="text-secondary m-0 fs-7">Funds Received</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <h6 class="text-end">$5,432</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="row align-items-center">
-                      <div class="col-8">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
-                              <i class="bi bi-stripe"></i>
-                            </div>
-                          </div>
-                          <div>
-                            <h6 class="m-0">Stripe</h6>
-                            <p class="text-secondary m-0 fs-7">Invoice Paid</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <h6 class="text-end">$325</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="row align-items-center">
-                      <div class="col-8">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
-                              <i class="bi bi-credit-card-fill"></i>
-                            </div>
-                          </div>
-                          <div>
-                            <h6 class="m-0">Credit Card</h6>
-                            <p class="text-secondary m-0 fs-7">Top Up</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <h6 class="text-end">$99</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="row align-items-center">
-                      <div class="col-8">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
-                              <i class="bi bi-bank2"></i>
-                            </div>
-                          </div>
-                          <div>
-                            <h6 class="m-0">Bank</h6>
-                            <p class="text-secondary m-0 fs-7">Check Deposited</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <h6 class="text-end">$2,432</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="row align-items-center">
-                      <div class="col-8">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
-                              <i class="bi bi-wallet-fill"></i>
-                            </div>
-                          </div>
-                          <div>
-                            <h6 class="m-0">Wallet</h6>
-                            <p class="text-secondary m-0 fs-7">Bill Payment</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <h6 class="text-end">$750</h6>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="row align-items-center">
-                      <div class="col-8">
-                        <div class="d-flex align-items-center">
-                          <div>
-                            <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
-                              <i class="bi bi-arrow-up-left-circle-fill"></i>
-                            </div>
-                          </div>
-                          <div>
-                            <h6 class="m-0">Refund</h6>
-                            <p class="text-secondary m-0 fs-7">Case Closed</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <h6 class="text-end">$289</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* <!-- Section - Bootstrap Brain Component --> */}
-    <section class="pb-3 pb-md-4 pb-xl-5 bg-light">
-      <div class="container">
-        <div class="row gy-3 gy-md-4">
-          <div class="col-12 col-lg-6 col-xl-5">
-            {/* <!-- Calendar 1 - Bootstrap Brain Component --> */}
-            <div class="card widget-card border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <div id="bsb-calendar-1" class="fc fc-media-screen fc-direction-ltr fc-theme-bootstrap5 bsb-calendar-theme"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-6 col-xl-7">
-            {/* <!-- Table 1 - Bootstrap Brain Component --> */}
-            <div class="card widget-card border-light shadow-sm h-100">
-              <div class="card-body p-4">
-                <h5 class="card-title widget-card-title mb-4">Monthly Transactions</h5>
-                <div class="table-responsive">
-                  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
-                    <thead>
-                      <tr>
-                        <th>Invoice</th>
-                        <th>Customer</th>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <h6 class="mb-1">#HO3210</h6>
-                          <span class="text-secondary fs-7">Web, UI Design</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">Oliver</h6>
-                          <span class="text-secondary fs-7">United States</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">Bootstrap</h6>
-                          <span class="text-secondary fs-7">v5.3+</span>
-                        </td>
-                        <td>$495</td>
-                        <td>
-                          <span class="badge rounded-pill bg-danger">Pending</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h6 class="mb-1">#DR8672</h6>
-                          <span class="text-secondary fs-7">Web, UX Design</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">Emma</h6>
-                          <span class="text-secondary fs-7">United Kingdom</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">WordPress</h6>
-                          <span class="text-secondary fs-7">v6.3+</span>
-                        </td>
-                        <td>$950</td>
-                        <td>
-                          <span class="badge rounded-pill bg-success">Paid</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h6 class="mb-1">#SA2910</h6>
-                          <span class="text-secondary fs-7">Web, SEO</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">Isabella</h6>
-                          <span class="text-secondary fs-7">Canada</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">React</h6>
-                          <span class="text-secondary fs-7">v18+</span>
-                        </td>
-                        <td>$700</td>
-                        <td>
-                          <span class="badge rounded-pill bg-info">On Hold</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h6 class="mb-1">#BD1019</h6>
-                          <span class="text-secondary fs-7">SEM, SEO</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">William</h6>
-                          <span class="text-secondary fs-7">UAE</span>
-                        </td>
-                        <td>
-                          <h6 class="mb-1">Vue</h6>
-                          <span class="text-secondary fs-7">v3+</span>
-                        </td>
-                        <td>$875</td>
-                        <td>
-                          <span class="badge rounded-pill bg-warning">Negotiating</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-
-  </main>
-  
-
-</div>
+    </main>
   )
 }
 
