@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './StarRating'; // Import the StarRating component
+import './ReviewApp.css'; // Import your CSS file for styling
 
 const ReviewApp = () => {
   const [reviews, setReviews] = useState([]);
@@ -41,7 +42,7 @@ const ReviewApp = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Review App</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label><br />
@@ -56,13 +57,13 @@ const ReviewApp = () => {
         <button type="submit">Submit Review</button>
       </form>
 
-      <div>
+      <div className="card-container">
         {reviews.map((review) => (
-          <div key={review._id}>
+          <div key={review._id} className="card">
             <h3>{review.title}</h3>
             <p>{review.body}</p>
             <p>
-              <StarRating rating={review.rating} />
+            <StarRating rating={parseInt(Math.max(Math.min(review.rating, 5), 1))} />
             </p>
           </div>
         ))}

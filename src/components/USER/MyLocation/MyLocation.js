@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import moment from 'moment';
 
-// تحديد مسار الصور داخل مجلد الـ Leaflet
 const gasStationIcon = process.env.PUBLIC_URL + '/leaflet/red-map-pin-with-gas-station-sign-icon-isolated-vector-14374487.jpg';
 const userIcon = process.env.PUBLIC_URL + '/leaflet/marker-icon.png';
 
@@ -30,6 +30,10 @@ function MyLocationMap() {
     const [gasStations, setGasStations] = useState([]);
     const [mapCenter, setMapCenter] = useState([0, 0]);
     const [route, setRoute] = useState([]);
+    const [arrivalTime, setArrivalTime] = useState(null);
+    const mapRef = useRef(null);
+    const [estimatedTimeToReach, setEstimatedTimeToReach] = useState(null); 
+    const [showNearestStation, setShowNearestStation] = useState(false);
 
     useEffect(() => {
         if ("geolocation" in navigator) {
@@ -43,7 +47,6 @@ function MyLocationMap() {
             console.log("your location invalied");
         }
 
-       
         axios.get('/api/v1/stations/getAllStations')
             .then(response => {
                 const stations = response.data.data; 
@@ -69,16 +72,23 @@ function MyLocationMap() {
         if (nearest) {
             setMapCenter([nearest.station.coordinates[1], nearest.station.coordinates[0]]);
             setRoute([[position.latitude, position.longitude], [nearest.station.coordinates[1], nearest.station.coordinates[0]]]);
+            mapRef.current.flyTo([nearest.station.coordinates[1], nearest.station.coordinates[0]], 13);
+
+            const speed = 50; 
+            const timeToReach = minDistance / speed; 
+            const timeInMinutes = Math.round(timeToReach * 60); 
+            setEstimatedTimeToReach(timeInMinutes);
+            setShowNearestStation(true); 
         }
     };
 
     return (
         <div style={{ textAlign: 'center' }}>
-            <h1 style={{ color: '#343a40', marginBottom: '20px' }}>Gas Stations Near You</h1>
+            <h1 style={{ color: '#343a40', marginBottom: '5px' }}>Your Location </h1>
             {position.latitude && position.longitude ? (
                 <div>
-                    <p>Latitude: {position.latitude}</p>
-                    <p>Longitude: {position.longitude}</p>
+                    <p>Latitude: {position.latitude}  Longitude: {position.longitude}</p>
+                   
                     <button
                         onClick={handleFindNearestStation}
                         style={{
@@ -92,17 +102,18 @@ function MyLocationMap() {
                             marginBottom: '20px'
                         }}
                     >
-                        Find Near Current Location
+                        Find Nearest Station
                     </button>
-                    {nearestStation && (
+                    {/* {showNearestStation && (
                         <div style={{ marginBottom: '20px' }}>
-                            {/* <h3 style={{ color: '#343a40' }}>Nearest Station</h3> */}
-                            {/* <p><strong>Name:</strong> {nearestStation.StationName}</p>
+                            <h3 style={{ color: '#343a40' }}>Nearest Station</h3>
+                            <p><strong>Name:</strong> {nearestStation.StationName}</p>
                             <p><strong>Distance:</strong> {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
+                            <p><strong>Arrival Time:</strong> {estimatedTimeToReach ? moment().add(estimatedTimeToReach, 'minutes').format('LT') : 'Unknown'}</p>
                             <p><strong>Address:</strong> {nearestStation.address}</p>
-                            <p><strong>Description:</strong> {nearestStation.description}</p> */}
+                            <p><strong>Description:</strong> {nearestStation.description}</p>
                         </div>
-                    )}
+                    )} */}
                 </div>
             ) : (
                 <p>Loading your location...</p>
@@ -110,17 +121,18 @@ function MyLocationMap() {
             {position.latitude && position.longitude && (
                 <div style={{ position: 'relative', marginBottom: '20px' }}>
                     <div style={{ position: 'absolute', top: '10px', left: '10px', backgroundColor: '#f8f9fa', padding: '10px', borderRadius: '5px', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', zIndex: '1000' }}>
-                        {nearestStation && (
+                        {showNearestStation && (
                             <div>
                                 <h3 style={{ color: '#343a40' }}>Nearest Station</h3>
                                 <p><strong>Name:</strong> {nearestStation.StationName}</p>
                                 <p><strong>Distance:</strong> {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
+                                <p><strong>Arrival Time:</strong> {estimatedTimeToReach ? moment().add(estimatedTimeToReach, 'minutes').format('LT') : 'Unknown'}</p>
                                 <p><strong>Address:</strong> {nearestStation.address}</p>
                                 <p><strong>Description:</strong> {nearestStation.description}</p>
                             </div>
                         )}
                     </div>
-                    <MapContainer center={[position.latitude, position.longitude]} zoom={13} style={{ height: '400px', width: '100%' }}>
+                    <MapContainer ref={mapRef} center={[position.latitude, position.longitude]} zoom={13} style={{ height: '400px', width: '100%' }}>
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />

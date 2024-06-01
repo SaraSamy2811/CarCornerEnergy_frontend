@@ -12,8 +12,7 @@ const Offers = () => {
   const [paymentMethod, setPaymentMethod] = useState('cash'); // Default payment method
   const [paymentData, setPaymentData] = useState({
     nameOnCard: '',
-    
-creditCardNumber: '',
+    creditCardNumber: '',
     expiration: '',
     cvv: ''
   });
@@ -64,10 +63,10 @@ creditCardNumber: '',
 
   const handlePaymentSubmit = async () => {
     const { nameOnCard, creditCardNumber, expiration, cvv } = paymentData;
-    // if (paymentMethod === 'visa' && (!nameOnCard || !creditCardNumber || !expiration || !cvv)) {
-    //   setPaymentError('Please fill all payment fields.');
-    //   return;
-    // }
+    if (paymentMethod === 'visa' && (!nameOnCard || !creditCardNumber || !expiration || !cvv)) {
+      setPaymentError('Please fill all payment fields.');
+      return;
+    }
     try {
       const response = await axios.post('/api/v1/payment/choose', paymentData)
     
@@ -75,16 +74,16 @@ creditCardNumber: '',
         alert('payment successful!');
       } else {
         const errorMessage = response.data.error || ' payment.';
-        setPromoCodeError(errorMessage);
+        setPaymentError(errorMessage);
       } 
     } catch (error) {
       if (error.response) {
         const errorMessage = error.response.data.error || 'An error occurred while payment.';
-        setPromoCodeError(errorMessage);
+        setPaymentError(errorMessage);
       } else if (error.request) {
-        setPromoCodeError('No response received from the server.');
+        setPaymentError('No response received from the server.');
       } else {
-        setPromoCodeError('An error occurred while processing the request.');
+        setPaymentError('An error occurred while processing the request.');
       }
     }
   };
@@ -126,7 +125,7 @@ creditCardNumber: '',
                           Cash
                         </label>
                       </div>
-                      {(paymentMethod === 'visa' || paymentMethod === 'cash') &&
+                      {(paymentMethod === 'visa' ) &&
                         <div className="form-outline mb-4">
                           <input type="text" id="form3Example3" className="form-control" name="promoCode" value={promoCode} onChange={handleInputChange} />
                           <label className="form-label" htmlFor="form3Example3">Promo Code</label>
@@ -148,7 +147,7 @@ creditCardNumber: '',
                           </div>
                           <div className="col">
                             <div className="form-outline">
-                              <input type="text" id="formCardNumber" className="form-control" name="cardNumber" value={paymentData.cardNumber} onChange={handleInputChange} />
+                              <input type="text" id="formCardNumber" className="form-control" name="creditCardNumber" value={paymentData.creditCardNumber} onChange={handleInputChange} />
                               <label className="form-label" htmlFor="formCardNumber">Card number</label>
                             </div>
                           </div>
@@ -173,7 +172,7 @@ creditCardNumber: '',
                       <button type="button" className="btn btn-dark btn-lg btn-block" onClick={handlePaymentSubmit}>
                         Continue to checkout
                       </button>
-                      {paymentError && <p style={{ color: 'red' }}>{paymentError}</p>}
+                      {(paymentMethod === 'visa') && <div>{paymentError && <p style={{ color: 'red' }}>{paymentError}</p>}</div>}
                     </form>
                   </div>
                 </div>
