@@ -44,7 +44,7 @@ function ManageStations() {
     console.log('Opening date button clicked!');
   };
   return (
-    <div className="container">
+    <div className="container-add-stations">
       <h2>Add a Place</h2>
       <form onSubmit={handleSubmit} className="place-form">
         <div className="form-group">
