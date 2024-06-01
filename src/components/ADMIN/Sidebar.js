@@ -57,4 +57,4 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
   )
 }
 
-export default Sidebar
+export default Sidebar;
