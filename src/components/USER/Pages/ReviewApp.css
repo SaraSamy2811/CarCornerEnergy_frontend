@@ -1,0 +1,43 @@
+body {
+    background-color: #007bff; /* لون الخلفية للصفحة */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+}
+
+.card {
+    background-color: #007bff; /* لون البطاقة */
+    color: #ffffff; /* لون النص داخل البطاقة */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card p {
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+.star-rating {
+    color: #ffc107 !important; /* لون النجوم */
+}

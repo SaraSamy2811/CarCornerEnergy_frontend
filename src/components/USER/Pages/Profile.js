@@ -10,7 +10,8 @@ function Profile() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [carType, setCarType] = useState('');
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -37,7 +38,8 @@ function Profile() {
       setName(userData.name);
       setEmail(userData.email);
       setPhone(userData.phone);
-      setCarType(userData.carType);
+      setMake(userData.make);
+      setModel(userData.model);
       setLoading(false);
       alert('Your profile data has been successfully fetched!');
     } catch (error) {
@@ -128,10 +130,19 @@ function Profile() {
                   <hr />
                   <div className="row">
                     <div className="col-sm-3">
-                      <p className="mb-0">Car Type</p>
+                      <p className="mb-0">make</p>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{carType}</p>
+                      <p className="text-muted mb-0">{make}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <p className="mb-0">model</p>
+                    </div>
+                    <div className="col-sm-9">
+                      <p className="text-muted mb-0">{model}</p>
                     </div>
                   </div>
                   {/* <button onClick={updateUserProfile}>Update Profile</button> */}

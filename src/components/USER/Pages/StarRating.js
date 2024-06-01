@@ -1,15 +1,15 @@
 import React from 'react';
 
 const StarRating = ({ rating }) => {
-  const stars = [];
-  for (let i = 1; i <= 5; i++) {
-    stars.push(
-      <span key={i} className={i <= rating ? 'star-filled' : 'star-empty'}>
+  const filledStars = [];
+  for (let i = 0; i < rating; i++) {
+    filledStars.push(
+      <span key={i} className="star-filled">
         &#9733; {/* Unicode star character */}
       </span>
     );
   }
-  return <div className="star-rating">{stars}</div>;
+  return <div className="star-rating">{filledStars}</div>;
 };
 
 export default StarRating;

@@ -15,7 +15,8 @@ function Register() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [phone, setPhone] = useState('');
-  const [carType, setCarType] = useState('');
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
   const [role, setRole] = useState('');
   
   const [registrationError, setRegistrationError] = useState('');
@@ -40,20 +41,20 @@ function Register() {
     else if (name === 'passwordConfirm') {
       setPasswordConfirm(value);
     } 
-    else if (name === 'carType') {
-      setCarType(value);
+    else if (name === 'make') {
+      setMake(value);
     }
-    else if (name === 'role') {
-      setRole(value);
+    else if (name === 'model') {
+      setModel(value);
     }
-    
-    setFormCompleted(name &&email  && password && passwordConfirm&& phone && carType);
+        
+    setFormCompleted(name &&email  && password && passwordConfirm&& phone && make && model);
   };
 
 
   const handleRegisteration = async () => {
    
-    if (!name || !passwordConfirm || !email || !phone || !carType || !password) {
+    if (!name || !passwordConfirm || !email || !phone ||  !password || !make || !model) {
       alert('Please fill in all fields.');
       return;
     }
@@ -63,7 +64,7 @@ function Register() {
     }
 /////////////////////////  new try  code
     try {
-      const userData = { name, email, password, passwordConfirm, phone, carType };
+      const userData = { name, email, password, passwordConfirm, phone, make,model };
       const response = await axios.post('/api/v1/auth/signup', userData);
     
       if (response.status >= 200 && response.status < 300) {
@@ -124,10 +125,14 @@ function Register() {
                     </div>
                     <div className="col-md-6 mb-4">
                       <div data-mdb-input-init className="form-outline">
-                        <input type="text" id="form3Example2" className="form-control" name="carType"value={carType} onChange={handleInputChange}  placeholder="Car Type"/>
-                        <label className="form-label" htmlFor="form3Example2">Car type </label>
+                        <input type="text" id="form3Example2" className="form-control" name="make"value={make} onChange={handleInputChange}  placeholder="make"/>
+                        <label className="form-label" htmlFor="form3Example2">make</label>
                       </div>
                     </div>
+                  </div>
+                  <div data-mdb-input-init className="form-outline mb-4">
+                    <input type="text" id="form3Example7" className="form-control" name="model" value={model} onChange={handleInputChange} placeholder="Your Model" />
+                    <label className="form-label" htmlFor="form3Example7">Model</label>
                   </div>
                   <div data-mdb-input-init className="form-outline mb-4">
                     <input type="email" id="form3Example3" className="form-control" name="email" value={email} onChange={handleInputChange} placeholder="Your Email" />
