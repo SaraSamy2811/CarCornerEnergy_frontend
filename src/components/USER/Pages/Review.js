@@ -42,7 +42,7 @@ const ReviewApp = () => {
   };
 
   return (
-    <div className="container">
+    <div className="containerD">
       <h1>Review App</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label><br />
@@ -57,9 +57,9 @@ const ReviewApp = () => {
         <button type="submit">Submit Review</button>
       </form>
 
-      <div className="card-container">
+      <div className="cardd-container">
         {reviews.map((review) => (
-          <div key={review._id} className="card">
+          <div key={review._id} className="cardd">
             <h3>{review.title}</h3>
             <p>{review.body}</p>
             <p>

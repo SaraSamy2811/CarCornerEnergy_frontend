@@ -53,13 +53,12 @@ const handleLogin = async () => {
       
       //alert('Login successful!,,Happy to see you again use promocode(promo5)');
       // window.location.href = './HomeForUser';
-      if (email === 'admin011@gmail.com') {
+      if (email === 'admin11@gmail.com') {
       // If the user role is admin, redirect to the admin page
-        // إذا كان دور المستخدم هو admin، قم بتوجيهه إلى صفحة الـ admin
+       
         window.location.href = './ADMIN';
       } else {
-        // إذا كان دور المستخدم ليس admin، قم بتوجيهه إلى صفحة الـ user
-       
+        
       
       // Display error message
       // setEmailError('Invalid email or password');
