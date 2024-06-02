@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/MangU.css'
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import 
 { ResponsiveContainer } 
 from 'recharts';
@@ -8,6 +9,7 @@ import FooterAdmin from '../FooterAdmin';
 
  
 function ManageUsers() {
+	let {id}= useParams();
 	const initialUsers = [
 		{
 		  id: 1, name: 'Full name 1', role: 'Member', created: '2013/08/12', status: 'pending',
@@ -60,29 +62,36 @@ function ManageUsers() {
         setFormData({ ...formData, [name]: value });
     };
 
-   
-    const handleSave = () => {
-		const { id, name, email, phone, make, model } = formData;
-		const updatedData = { name, email, phone, make, model };
-	
-		if (formData.password) {
-			updatedData.password = formData.password;
-		}
-	
-		axios.put(`/api/v1/users/${id}`, updatedData)
-			.then(() => {
-				setUsers(users.map(user => (user.id === id ? formData : user)));
-				setEditingId(null);
-				alert('User updated successfully');
-			})
-			.catch(error => {
-				console.error('Error updating user:', error);
-				alert('Failed to update user');
-			});
-	};
-	
+	   
+const handleSave = () => {
+    if (!id || id === 'undefined') {
+        console.error('Invalid ID');
+        alert('Invalid user ID');
+        return;
+    }
+    
+    const { name, email, phone, make, model } = formData;
 
-   
+    console.log('Form Data ID:', id);
+    const updatedData = { name, email, phone, make, model };
+
+    if (formData.password) {
+        updatedData.password = formData.password;
+    }
+
+    axios.put(`/api/v1/users/${id}`, updatedData)
+        .then(response => {
+            console.log(response.data);
+            setUsers(users.map(user => (user._id === id ? response.data.data : user)));
+            setEditingId(null);
+            alert('User updated successfully');
+        })
+        .catch(error => {
+            console.error('Error updating user:', error);
+            alert('Failed to update user');
+        });
+};
+
     const handleDelete = (userId) => {
 		if (!userId) {
 			console.error('Invalid user ID');
@@ -115,10 +124,10 @@ function ManageUsers() {
 		// }
 	
 		// Check if password and confirm password match
-		// if (password !== passwordConfirm) {
-		// 	alert('Password and confirm password do not match.');
-		// 	return;
-		// }
+		if (password !== passwordConfirm) {
+			alert('Password and confirm password do not match.');
+			return;
+		}
 	
 		try {
 			const response = await axios.post('/api/v1/users', {
