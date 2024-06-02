@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "../css/ManageStations.css";
-import "./OpeningDateForm";
+import StationRow from './StationRow';
 
 const mapContainerStyle = {
   width: "100%",
@@ -14,6 +14,32 @@ const center = {
 };
 
 function ManageStations() {
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from your database here
+    // Example static data:
+    const fetchData = async () => {
+      const data = [
+        { id: 1, name: 'Station 1', coordinates: '123,456', address: 'Address 1', description: 'Description 1' },
+        { id: 2, name: 'Station 2', coordinates: '789,012', address: 'Address 2', description: 'Description 2' },
+      ];
+      setStations(data);
+    };
+    fetchData();
+  }, []);
+
+  const handleDelete = (id) => {
+    setStations(stations.filter(station => station.id !== id));
+  };
+
+  const handleEdit = (updatedStation) => {
+    setStations(stations.map(station => station.id === updatedStation.id ? updatedStation : station));
+  };
+
+/////////////////
+
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "YOUR_GOOGLE_MAPS_API_KEY", // Replace with your API key
   });
@@ -38,12 +64,31 @@ function ManageStations() {
   if (!isLoaded) return <div>Loading Maps</div>;
 
 
-   // Your logic for handling the button click goes here
-   const handleButtonClick = () => {
-    // Implement your desired behavior
-    console.log('Opening date button clicked!');
-  };
+ 
   return (
+      <div>
+    <table>
+    <thead>
+      <tr>
+        <th>Station Name</th>
+        <th>Coordinates</th>
+        <th>Address</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {stations.map(station => (
+        <StationRow
+          key={station.id}
+          station={station}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
+      ))}
+    </tbody>
+  </table>
+
     <div className="container-add-stations">
       <h2>Add a station</h2>
       <form onSubmit={handleSubmit} className="place-form">
@@ -101,6 +146,7 @@ function ManageStations() {
 
        
       </form>
+    </div>
     </div>
   );
 }
