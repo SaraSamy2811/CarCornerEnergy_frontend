@@ -9,7 +9,7 @@ const gasStationIcon = process.env.PUBLIC_URL + '/leaflet/red-map-pin-with-gas-s
 const userIcon = process.env.PUBLIC_URL + '/leaflet/marker-icon.png';
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; 
+    const R = 6371;
     const dLat = (lat2 - lat1) * (Math.PI / 180);
     const dLon = (lon2 - lon1) * (Math.PI / 180);
     const a =
@@ -19,7 +19,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; 
+    const distance = R * c;
     return distance;
 }
 
@@ -32,8 +32,10 @@ function MyLocationMap() {
     const [route, setRoute] = useState([]);
     const [arrivalTime, setArrivalTime] = useState(null);
     const mapRef = useRef(null);
-    const [estimatedTimeToReach, setEstimatedTimeToReach] = useState(null); 
+    const [estimatedTimeToReach, setEstimatedTimeToReach] = useState(null);
     const [showNearestStation, setShowNearestStation] = useState(false);
+    const [showUserMarker, setShowUserMarker] = useState(false);
+    const [showStationInfo, setShowStationInfo] = useState(false);
 
     useEffect(() => {
         if ("geolocation" in navigator) {
@@ -42,22 +44,26 @@ function MyLocationMap() {
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude,
                 });
+                setMapCenter([position.coords.latitude, position.coords.longitude]);
             });
         } else {
-            console.log("your location invalied");
+            console.log("Your browser does not support geolocation.");
+            // Set default center if geolocation is not available
+            setMapCenter([0, 0]);
         }
 
         axios.get('/api/v1/stations/getAllStations')
             .then(response => {
-                const stations = response.data.data; 
+                const stations = response.data.data;
                 setGasStations(stations);
             })
             .catch(error => {
-                console.error('error to fetch station', error);
+                console.error('Error fetching stations', error);
             });
     }, []);
 
     const handleFindNearestStation = () => {
+        setShowUserMarker(true);
         let nearest = null;
         let minDistance = Number.MAX_VALUE;
         gasStations.forEach(station => {
@@ -71,96 +77,102 @@ function MyLocationMap() {
         setDistanceToNearestStation(minDistance);
         if (nearest) {
             setMapCenter([nearest.station.coordinates[1], nearest.station.coordinates[0]]);
-            setRoute([[position.latitude, position.longitude], [nearest.station.coordinates[1], nearest.station.coordinates[0]]]);
+            setRoute([]);
             mapRef.current.flyTo([nearest.station.coordinates[1], nearest.station.coordinates[0]], 13);
 
-            const speed = 50; 
-            const timeToReach = minDistance / speed; 
-            const timeInMinutes = Math.round(timeToReach * 60); 
+            const speed = 50;
+            const timeToReach = minDistance / speed;
+            const timeInMinutes = Math.round(timeToReach * 60);
             setEstimatedTimeToReach(timeInMinutes);
-            setShowNearestStation(true); 
+            setShowNearestStation(true);
+            setShowStationInfo(true);
+        }
+    };
+
+    const handleStart = () => {
+        if (nearestStation) {
+            setRoute([[position.latitude, position.longitude], [nearestStation.station.coordinates[1], nearestStation.station.coordinates[0]]]);
+            setShowStationInfo(false);
+            mapRef.current.invalidateSize(); // Update map size to show user location
         }
     };
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1 style={{ color: '#343a40', marginBottom: '5px' }}>Your Location </h1>
-            {position.latitude && position.longitude ? (
-                <div>
-                    <p>Latitude: {position.latitude}  Longitude: {position.longitude}</p>
-                   
-                    <button
-                        onClick={handleFindNearestStation}
-                        style={{
-                            backgroundColor: '#ffc107',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '5px',
-                            padding: '10px 20px',
-                            fontSize: '18px',
-                            cursor: 'pointer',
-                            marginBottom: '20px'
-                        }}
-                    >
-                        Find Nearest Station
-                    </button>
-                    {/* {showNearestStation && (
-                        <div style={{ marginBottom: '20px' }}>
-                            <h3 style={{ color: '#343a40' }}>Nearest Station</h3>
-                            <p><strong>Name:</strong> {nearestStation.StationName}</p>
-                            <p><strong>Distance:</strong> {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
-                            <p><strong>Arrival Time:</strong> {estimatedTimeToReach ? moment().add(estimatedTimeToReach, 'minutes').format('LT') : 'Unknown'}</p>
-                            <p><strong>Address:</strong> {nearestStation.address}</p>
-                            <p><strong>Description:</strong> {nearestStation.description}</p>
-                        </div>
-                    )} */}
-                </div>
-            ) : (
-                <p>Loading your location...</p>
-            )}
-            {position.latitude && position.longitude && (
-                <div style={{ position: 'relative', marginBottom: '20px' }}>
-                    <div style={{ position: 'absolute', top: '10px', left: '10px', backgroundColor: '#f8f9fa', padding: '10px', borderRadius: '5px', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', zIndex: '1000' }}>
-                        {showNearestStation && (
-                            <div>
-                                <h3 style={{ color: '#343a40' }}>Nearest Station</h3>
-                                <p><strong>Name:</strong> {nearestStation.StationName}</p>
-                                <p><strong>Distance:</strong> {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
-                                <p><strong>Arrival Time:</strong> {estimatedTimeToReach ? moment().add(estimatedTimeToReach, 'minutes').format('LT') : 'Unknown'}</p>
-                                <p><strong>Address:</strong> {nearestStation.address}</p>
-                                <p><strong>Description:</strong> {nearestStation.description}</p>
-                            </div>
-                        )}
+        <div style={{ position: 'relative', height: '100vh' }}>
+            <MapContainer ref={mapRef} center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {gasStations.map(station => (
+                    <Marker key={station._id} position={[station.station.coordinates[1], station.station.coordinates[0]]} icon={L.icon({ iconUrl: gasStationIcon, iconSize: [30, 30], iconAnchor: [15, 30] })}>
+                        <Popup>
+                            {station.StationName}
+                            <p><strong>Address:</strong> {station.address}</p>
+                            <p><strong>Description:</strong> {station.description}</p>
+                        </Popup>
+                    </Marker>
+                ))}
+                {position.latitude && position.longitude && showUserMarker && (
+                    <Marker position={[position.latitude, position.longitude]} icon={L.icon({ iconUrl: userIcon })}>
+                        <Popup>
+                            Your Current Location
+                        </Popup>
+                    </Marker>
+                )}
+                {route.length > 0 && <Polyline positions={route} color="blue" />}
+            </MapContainer>
+            <div style={{ position: 'absolute', top: '20px', left: '20px', zIndex: '1000' }}>
+                <h1 style={{ color: '#343a40', marginBottom: '5px' }}>Your Location </h1>
+                <button
+                    onClick={handleFindNearestStation}
+                    style={{
+                        backgroundColor: '#ffc107',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '5px',
+                        padding: '10px 20px',
+                        fontSize: '18px',
+                        cursor: 'pointer',
+                    }}
+                >
+                    Find Nearest Station
+                </button>
+                <button
+                    onClick={handleStart}
+                    style={{
+                        backgroundColor: '#007bff',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '5px',
+                        padding: '10px 20px',
+                        fontSize: '18px',
+                        cursor: 'pointer',
+                        marginTop: '10px',
+                    }}
+                >
+                    Start
+                </button>
+                {showStationInfo && nearestStation && (
+                    <div style={{ marginBottom: '20px' }}>
+                        <h3 style={{ color: '#343a40' }}>Nearest Station</h3>
+                        <p><strong>Name:</strong> {nearestStation.StationName}</p>
+                        <p><strong>Distance:</strong> {distanceToNearestStation ? distanceToNearestStation.toFixed(2) : 'Unknown'} km</p>
+                        <p><strong>Arrival Time:</strong> {estimatedTimeToReach ? moment().add(estimatedTimeToReach, 'minutes').format('LT') : 'Unknown'}</p>
+                        <p><strong>Address:</strong> {nearestStation.address}</p>
+                        <p><strong>Description:</strong> {nearestStation.description}</p>
                     </div>
-                    <MapContainer ref={mapRef} center={[position.latitude, position.longitude]} zoom={13} style={{ height: '400px', width: '100%' }}>
-                        <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        {gasStations.map(station => (
-                            <Marker key={station._id} position={[station.station.coordinates[1], station.station.coordinates[0]]} icon={L.icon({ iconUrl: gasStationIcon, iconSize: [30, 30], iconAnchor: [15, 30] })}>
-                                <Popup>
-                                    {station.StationName}
-                                    <p><strong>Address:</strong> {station.address}</p>
-                                    <p><strong>Description:</strong> {station.description}</p>
-                                </Popup>
-                            </Marker>
-                        ))}
-                        {position.latitude && position.longitude && (
-                            <Marker position={[position.latitude, position.longitude]} icon={L.icon({ iconUrl: userIcon })}>
-                                <Popup>
-                                    Your Current Location
-                                </Popup>
-                            </Marker>
-                        )}
-                        {route.length > 0 && <Polyline positions={route} color="blue" />}
-                    </MapContainer>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }
 
 export default MyLocationMap;
+
+
+
+
+
 
 
 //  import React, { useState, useEffect } from 'react';

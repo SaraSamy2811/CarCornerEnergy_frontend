@@ -65,9 +65,9 @@ function ResetPassword() {
       <button onClick={handleResetPassword}>Reset Password</button>
       {passwordError && <div>{passwordError}</div>}
                         </div>
-                        <div className="pt-1 mb-4">
+                        {/* <div className="pt-1 mb-4">
                           <button data-mdb-button-init data-mdb-ripple-init className="btn btn-dark btn-lg btn-block" type="button" onClick={handleResetPassword}>Reset Password</button>
-                        </div>
+                        </div> */}
                         {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
                         <Link to="/login" className="small text-muted">Back to Login</Link>
                       </form>
