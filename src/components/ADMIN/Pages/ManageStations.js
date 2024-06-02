@@ -2,6 +2,10 @@ import React, { useState, useEffect  } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "../css/ManageStations.css";
 import StationRow from './StationRow';
+import 
+{ ResponsiveContainer } 
+from 'recharts';
+import FooterAdmin from '../FooterAdmin';
 
 const mapContainerStyle = {
   width: "100%",
@@ -146,7 +150,10 @@ function ManageStations() {
 
        
       </form>
+
     </div>
+    <ResponsiveContainer><FooterAdmin/> </ResponsiveContainer>
+        
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../css/MangU.css'
 import axios from 'axios';
+import 
+{ ResponsiveContainer } 
+from 'recharts';
+import FooterAdmin from '../FooterAdmin';
 
  
 function ManageUsers() {
@@ -341,7 +345,8 @@ function ManageUsers() {
   </section>
 </div>
 
-
+<ResponsiveContainer><FooterAdmin/> </ResponsiveContainer>
+        
     </div>
 
   )

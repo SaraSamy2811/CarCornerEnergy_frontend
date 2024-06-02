@@ -37,21 +37,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                     <BsPeopleFill className='icon'/> Manage Users
                     </Link>
             </li>
-            <li className='sidebar-list-item'>
-            <Link to="/Admin">
-                    <BsListCheck className='icon'/> Inventory
-                    </Link>
-            </li>
-            <li className='sidebar-list-item'>
-            <Link to="/Admin">
-                    <BsMenuButtonWideFill className='icon'/> Reports
-                    </Link>
-            </li>
-            <li className='sidebar-list-item'>
-            <Link to="/Admin">
-                    <BsFillGearFill className='icon'/> Setting
-                    </Link>
-            </li>
+            
         </ul>
     </aside>
   )
