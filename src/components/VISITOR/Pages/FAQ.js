@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './FAQ.css';
-
+import backgroundImage from '../../../assests/imges/background.jpg'; 
 const Freqasked = () => {
 
   const [showAnswer, setShowAnswer] = useState(new Array(8).fill(false));
@@ -13,11 +13,14 @@ const Freqasked = () => {
   };
 
   return (
-    <div className="faq-section" >
-   
-
-<div class="faq-section">
-<h1>Frequently Asked Questions</h1>
+    <div>
+    <section className="text-center">
+      <div className="p-5 bg-image" style={{ backgroundImage: `url(${backgroundImage})`, height: "300px", backgroundSize: "cover", backgroundPosition: "center" }}></div>
+      <div className="card mx-4 mx-md-5 shadow-5-strong" style={{ marginTop: "-100px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(10px)" }}>
+        <div className="card-body py-5 px-md-5">
+          <div className="row d-flex justify-content-center">
+            <div className="col-lg-8">
+              <h1 className="fw-bold mb-5">Frequently Asked Questions</h1>
     <div className="faq-container">
       <div className="faq-item">
         <div className="faq-question" onClick={() => toggleAnswer(0)}>
@@ -117,6 +120,15 @@ We are working on implementing notification features to alert users about nearby
       </div>
     </div>
     </div>
+    </div>
+    </div>
+                
+              
+            
+          
+          </div>
+      
+      </section>
     </div>
 
   );

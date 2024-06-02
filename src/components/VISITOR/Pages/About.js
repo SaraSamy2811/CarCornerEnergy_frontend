@@ -1,14 +1,20 @@
 import React from 'react';
 import './About.css'; // Import CSS file for styling
 import { AiOutlineCar } from 'react-icons/ai';
+import backgroundImage from'../../../assests/imges/background.jpg'
 
 const AboutUs = () => {
   return (
  
 
-          <div className='about_bg'>
-      <div className="about-us-container">
-      <h2>About Us</h2>
+    
+    <section className="text-center">
+      <div className="p-5 bg-image" style={{ backgroundImage:`url(${backgroundImage})`, height: "300px" ,backgroundSize: "cover", backgroundPosition: "center" }}></div>
+      <div className="card mx-4 mx-md-5 shadow-5-strong" style={{ marginTop: "-100px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(10px)" }}>
+        <div className="card-body py-5 px-md-5">
+          <div className="row d-flex justify-content-center">
+            <div className="col-lg-8">
+              <h2 className="fw-bold mb-5">About Us</h2>
       <div className="about-us-content">
         <AiOutlineCar className="icon-about" />
         <p>
@@ -22,7 +28,15 @@ The motivation behind this project stems from the challenges faced by electric c
         </p>
       </div>
      </div>
- </div>
+     </div>
+     </div>
+     </div>
+    
+        
+      
+      </section>
+    
+
   );
 };
       
