@@ -23,7 +23,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </Link>
             </li>
             <li className='sidebar-list-item'>
-            <Link to="/Admin">
+            <Link to="/Admin/ManageCoupons">
                     <BsFillArchiveFill className='icon'/> Manage Coupons
                     </Link>
             </li>

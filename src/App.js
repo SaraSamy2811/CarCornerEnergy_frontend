@@ -10,7 +10,7 @@ import HomeForUser from './components/USER/Pages/HomeForUser';
 import ContactUs from './components/VISITOR/Pages/ContactUs';
 import About from './components/VISITOR/Pages/About'
 import Profile from './components/USER/Pages/Profile';
-import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPrediction'
+//import EnergyConsumptionPrediction from '../src/REG.MODEL/EnergyConsumptionPrediction'
 import VisitorInterface from './components/VISITOR/VisitorInterface';
 import UserInterface from './components/USER/UserInterface';
 
@@ -26,6 +26,7 @@ import VerifyResetCode from './components/VISITOR/Pages/VerifyResetCode';
 import EiditProfile from './components/USER/Pages/EiditProfile';
 import Model from './REG.MODEL/Model';
 import AdminProfile from './components/ADMIN/Pages/AdminProfile';
+import ManageCoupons from './components/ADMIN/Pages/ManageCoupons';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
             <Route index element={<Dashbord/>}/>
             <Route path="/Admin/ManageUsers" element={<ManageUsers />} />
             <Route path="/Admin/ManageStations" element={<ManageStations />} />
+            <Route path="/Admin/ManageCoupons" element={<ManageCoupons/>} />
             <Route path="/Admin/adminprofile" element={<AdminProfile />} />
             
           </Route>

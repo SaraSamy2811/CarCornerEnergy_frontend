@@ -8,6 +8,7 @@ import ManageStations from './Pages/ManageStations'
 import HeaderForAdmin from './HeaderForAdmin'
 import './css/Dashbord.css'
 import AdminProfile from './Pages/AdminProfile'
+import ManageCoupons from './Pages/ManageCoupons'
 
 
 
@@ -29,6 +30,7 @@ export default function AdminInterface() {
         <Dashbord/>
         <ManageUsers/>
         <ManageStations/>
+        <ManageCoupons/>
         <AdminProfile/>
       </Outlet>
   
