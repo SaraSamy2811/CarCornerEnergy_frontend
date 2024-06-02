@@ -19,9 +19,9 @@ function ManageStations() {
   });
 
   const [placeName, setPlaceName] = useState("");
-  const [category, setCategory] = useState("");
+  const [Coordianates, setCoordianates] = useState("");
   const [address, setAddress] = useState("");
-  const [locatedWithin, setLocatedWithin] = useState("");
+  const [Description, setDescription] = useState("");
   const [marker, setMarker] = useState(center);
 
   const handleMapClick = (event) => {
@@ -30,7 +30,7 @@ function ManageStations() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Place Details:", { placeName, category, address, locatedWithin, marker });
+    console.log("Place Details:", { placeName, Coordianates, address, Description, marker });
     // Add functionality to submit the data to the server or API here
   };
 
@@ -45,10 +45,10 @@ function ManageStations() {
   };
   return (
     <div className="container-add-stations">
-      <h2>Add a Place</h2>
+      <h2>Add a station</h2>
       <form onSubmit={handleSubmit} className="place-form">
         <div className="form-group">
-          <label>Place name (required)*</label>
+          <label>station name (required)*</label>
           <input
             type="text"
             value={placeName}
@@ -57,11 +57,11 @@ function ManageStations() {
           />
         </div>
         <div className="form-group">
-          <label>Category (required)*</label>
+          <label>Coordianates (required)*</label>
           <input
             type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={Coordianates}
+            onChange={(e) => setCoordianates(e.target.value)}
             required
           />
         </div>
@@ -75,11 +75,11 @@ function ManageStations() {
           />
         </div>
         <div className="form-group">
-          <label>Located within</label>
+          <label>Description</label>
           <input
             type="text"
-            value={locatedWithin}
-            onChange={(e) => setLocatedWithin(e.target.value)}
+            value={Description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -96,10 +96,7 @@ function ManageStations() {
             Edit map location
           </button>
         </div>
-        <button onClick={handleButtonClick}>
-      Opening date
-      {/* You can add the right-pointing arrow icon here */}
-    </button>
+       
         <button type="submit">Submit</button>
 
        

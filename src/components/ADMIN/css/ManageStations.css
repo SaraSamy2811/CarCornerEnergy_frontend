@@ -1,5 +1,5 @@
 .container-add-stations {
-    width: 500px;
+    width: 600px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -31,7 +31,7 @@
   .place-form button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: var(--color-darker);
     color: white;
     border: none;
     border-radius: 5px;
@@ -39,7 +39,7 @@
   }
   
   .place-form button:hover {
-    background-color: #45a049;
+    background-color: var(--color-primary);
   }
   
   .form-group .map-container {
