@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/MangU.css'
+import axios from 'axios';
 
  
 function ManageUsers() {
@@ -24,30 +25,122 @@ function ManageUsers() {
 	  const [users, setUsers] = useState(initialUsers);
 	  const [editingId, setEditingId] = useState(null);
 	  const [formData, setFormData] = useState({});
-	
-	  const handleEdit = (user) => {
-		setEditingId(user.id);
-		setFormData(user);
-	  };
-	
-	  const handleChange = (e) => {
-		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
-	  };
-	
-	  const handleSave = () => {
-		setUsers(users.map(user => (user.id === formData.id ? formData : user)));
-		setEditingId(null);
-	  };
-	
 	  const handleCancel = () => {
 		setEditingId(null);
 		setFormData({});
 	  };
+	  
 	
-	  const handleDelete = (userId) => {
-		setUsers(users.filter(user => user.id !== userId));
-	  };
+
+	  useEffect(() => {
+       
+        axios.get('/api/v1/users')
+            .then(response => {
+                setUsers(response.data.data);
+				alert('fetch useres successfully');
+            })
+            .catch(error => {
+                console.error('Error fetching users:', error);
+				alert('error in fetch useres ');
+            });
+    }, []);
+
+    const handleEdit = (user) => {
+        setEditingId(user.id);
+        setFormData(user);
+    };
+
+    
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+   
+    const handleSave = () => {
+		const { id, name, email, phone, make, model } = formData;
+		const updatedData = { name, email, phone, make, model };
+	
+		if (formData.password) {
+			updatedData.password = formData.password;
+		}
+	
+		axios.put(`/api/v1/users/${id}`, updatedData)
+			.then(() => {
+				setUsers(users.map(user => (user.id === id ? formData : user)));
+				setEditingId(null);
+				alert('User updated successfully');
+			})
+			.catch(error => {
+				console.error('Error updating user:', error);
+				alert('Failed to update user');
+			});
+	};
+	
+
+   
+    const handleDelete = (userId) => {
+		if (!userId) {
+			console.error('Invalid user ID');
+			alert('Invalid user ID');
+			return;
+		}
+		if (window.confirm('Are you sure you want to delete this user?')) {
+			axios.delete(`/api/v1/users/${userId}`)
+				.then(() => {
+					setUsers(users.filter(user => user.id !== userId));
+					alert('User deleted successfully');
+				})
+				.catch(error => {
+					console.error('Error deleting user:', error);
+					alert('Failed to delete user');
+				});
+		}
+	};
+	
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		
+		const { name, email, password, passwordConfirm, phone, make, model } = formData;
+	
+		// Ensure all required fields are filled
+		// if (!name || !email || !password || !passwordConfirm || !phone || !make || !model) {
+		// 	alert('Please fill all required fields.');
+		// 	return;
+		// }
+	
+		// Check if password and confirm password match
+		// if (password !== passwordConfirm) {
+		// 	alert('Password and confirm password do not match.');
+		// 	return;
+		// }
+	
+		try {
+			const response = await axios.post('/api/v1/users', {
+				name,
+				email,
+				password,
+				passwordConfirm,
+				phone,
+				make,
+				model
+			});
+	
+			const newUser = response.data.user;
+			setUsers([...users, newUser]);
+			setFormData({}); 
+			alert('User added successfully');
+		} catch (error) {
+			console.error('Error adding user:', error);
+			if (error.response && error.response.data && error.response.data.error) {
+				alert(error.response.data.error);
+			} else {
+				alert('Failed to add user. Please try again later.');
+			}
+		}
+	};
+	
 	
 	  return (
 		<div>
@@ -180,16 +273,11 @@ function ManageUsers() {
               <form>
 
                 <div className="row">
-                  <div className="col-md-6 mb-4">
-                    <div className="form-outline">
-                      <input type="text" id="firstName" className="form-control form-control-lg" />
-                      <label className="form-label" htmlFor="firstName">First Name</label>
-                    </div>
-                  </div>
+                 
                   <div className="col-md-6 mb-4">
                     <div className="form-outline">
                       <input type="text" id="lastName" className="form-control form-control-lg" />
-                      <label className="form-label" htmlFor="lastName">Last Name</label>
+                      <label className="form-label" htmlFor="lastName">full Name</label>
                     </div>
                   </div>
                 </div>
@@ -240,8 +328,9 @@ function ManageUsers() {
                 </div>
 
                 <div className="mt-4 pt-2">
-                  <input className="btn btn-warning btn-lg" type="submit" value="Submit" />
-                </div>
+  <input className="btn btn-warning btn-lg" type="button" value="Submit" onClick={handleSubmit} />
+</div>
+
 
               </form>
             </div>
