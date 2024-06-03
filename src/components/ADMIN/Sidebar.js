@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import 
-{BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
-  BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
+{ BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill}
  from 'react-icons/bs'
  import Logo from '../../assests/imges/logo.png'
 

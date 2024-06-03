@@ -4,7 +4,7 @@ import ApexCharts from 'react-apexcharts'; // Install the 'react-apexcharts' pac
 const MyDonutChart4 = () => {
   const chartOptions = {
     series: [21, 23, 19, 14, 6],
-    labels: ['Clothing', 'Food Products', 'Electronics', 'Kitchen Utility', 'Gardening'],
+    labels: ['Microsoft Edge', 'Google Chrome', 'Fire Fox', 'Safari', 'Opera'],
     legend: { position: 'bottom' },
     theme: { palette: 'palette1' },
     chart: { type: 'donut' },
@@ -15,14 +15,14 @@ const MyDonutChart4 = () => {
           labels: {
             show: true,
             name: { fontSize: '22px', fontWeight: 600 },
-            value: { fontSize: '16px', fontWeight: 400, formatter: (value) => `$ ${value} thousands` },
+            value: { fontSize: '16px', fontWeight: 400, formatter: (value) => `${value} %` },
           },
         },
       },
     },
     tooltip: {
       y: {
-        formatter: (value) => `$ ${value} thousands`,
+        formatter: (value) => `${value} %`,
       },
     },
   };

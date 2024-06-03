@@ -140,7 +140,7 @@
   /* .card:first-child {
     background-color: #2962ff;
   } */
-  
+/*   
   .card:nth-child(2) {
     background-color: #ff6d00;
   }
@@ -152,7 +152,7 @@
   .card:nth-child(4) {
     background-color: #d50000;
   }
-  
+   */
   .card-inner {
     display: flex;
     align-items: center;
@@ -223,4 +223,65 @@
     padding: 20px;
     overflow-y: auto;
   }
+
+  /* chart1 and chart4  */
+
+  .dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust gap as needed */
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
   
+  .card-container {
+    flex: 1 1 100%; /* Default to full width */
+    max-width: calc(50% - 10px); /* Half width minus half the gap */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (max-width: 768px) {
+    .card-container {
+      max-width: 100%; /* Full width on small screens */
+    }
+  }
+    
+
+    
+
+
+
+
+ /* char3 and payment card */
+
+
+  .dashboard-container2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 50px;
+  }
+  
+  .responsive-container {
+    flex: 1 1 45%; /* Flex-grow, flex-shrink, flex-basis */
+    min-width: 300px; /* Ensures containers don't shrink too much */
+  }
+  
+  .card {
+    width: 100%;
+    height: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .responsive-container {
+      flex: 1 1 100%;
+    }
+  }
+  
+
+
+
+
+
+

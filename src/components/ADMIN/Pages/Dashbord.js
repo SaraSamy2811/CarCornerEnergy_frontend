@@ -3,58 +3,16 @@ import
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
  from 'react-icons/bs'
  import 
- { BarChart, Bar,  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
+ { ResponsiveContainer} 
  from 'recharts';
 import FooterAdmin from '../FooterAdmin';
-
+import Chart1 from '../controller/chart-1';
+import Chart3 from '../controller/chart-3';
+import Chart4 from '../controller/chart-4';
+import MyCalendar from '../controller/calendar-1';
 function  Dashbord() {
 
-    const data = [
-        {
-          name: 'Page A',
-          uv: 4000,
-          pv: 2400,
-          amt: 2400,
-        },
-        {
-          name: 'Page B',
-          uv: 3000,
-          pv: 1398,
-          amt: 2210,
-        },
-        {
-          name: 'Page C',
-          uv: 2000,
-          pv: 9800,
-          amt: 2290,
-        },
-        {
-          name: 'Page D',
-          uv: 2780,
-          pv: 3908,
-          amt: 2000,
-        },
-        {
-          name: 'Page E',
-          uv: 1890,
-          pv: 4800,
-          amt: 2181,
-        },
-        {
-          name: 'Page F',
-          uv: 2390,
-          pv: 3800,
-          amt: 2500,
-        },
-        {
-          name: 'Page G',
-          uv: 3490,
-          pv: 4300,
-          amt: 2100,
-        },
-      ];
-     
-
+   
   return (
     <main className='main-container'>
         <div className='main-title'>
@@ -92,54 +50,85 @@ function  Dashbord() {
             </div>
         </div>
 
-        <div className='charts'>
-            <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-            }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="pv" fill="#8884d8" />
-                <Bar dataKey="uv" fill="#82ca9d" />
-                </BarChart>
-            </ResponsiveContainer>
+        <div className="dashboard-container">
+      <div className="card-container">
+        <ResponsiveContainer width="100%" height="100%">
+          <div className="card widget-card border-light shadow-sm h-100">
+            <div className="card-body p-4">
+              <div className="d-block d-sm-flex align-items-center justify-content-between mb-3">
+                <div className="mb-3 mb-sm-0">
+                  <h5 className="card-title widget-card-title">Visitor Overview</h5>
+                </div>
+                <div>
+                  <select className="form-select text-secondary border-light-subtle">
+                    <option value="1">March 2024</option>
+                    <option value="2">April 2024</option>
+                    <option value="3">May 2024</option>
+                    <option value="4">June 2024</option>
+                  </select>
+                </div>
+              </div>
+              <div id="bsb-chart-1">
+                <Chart1 />
+              </div>
+            </div>
+          </div>
+        </ResponsiveContainer>
+      </div>
 
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-                >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                </LineChart>
-            </ResponsiveContainer>
+      <div className="card-container">
+        <ResponsiveContainer width="100%" height="100%">
+          <div className="card widget-card border-light shadow-sm h-100">
+            <div className="card-body p-4">
+              <div className="d-block d-sm-flex align-items-center justify-content-between mb-3">
+                <div className="mb-3 mb-sm-0">
+                  <h5 className="card-title widget-card-title">Web Browser</h5>
+                </div>
+                <div>
+                  <select className="form-select text-secondary border-light-subtle">
+                    <option value="1">March 2023</option>
+                    <option value="2">April 2023</option>
+                    <option value="3">May 2023</option>
+                    <option value="4">June 2023</option>
+                  </select>
+                </div>
+              </div>
+              <div id="bsb-chart-4">
+                <Chart4 />
+              </div>
+            </div>
+          </div>
+        </ResponsiveContainer>
+      </div>
+    </div>
+         
 
+
+    <div className="dashboard-container2">
+      <div className="responsive-container">
+        {/* Chart 3 - Bootstrap Brain Component */}
+        <div className="card widget-card border-light shadow-sm h-100">
+          <div className="card-body p-4">
+            <h5 className="card-title widget-card-title mb-3">Device Stats</h5>
+            <div id="bsb-chart-3"><Chart3/></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="responsive-container">
+      {/* <!-- Calendar 1 - Bootstrap Brain Component --> */}
+            <div class="card widget-card border-light shadow-sm h-100">
+              <div class="card-body p-4">
+                <div id="bsb-calendar-1" class="fc fc-media-screen fc-direction-ltr fc-theme-bootstrap5 bsb-calendar-theme"><MyCalendar/></div>
+              </div>
+            </div>
+          </div>
+    </div>
+           
+           
             <ResponsiveContainer><FooterAdmin/> </ResponsiveContainer>
         
-        </div>
+      
     </main>
   )
 }
