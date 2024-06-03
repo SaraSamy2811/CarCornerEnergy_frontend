@@ -1,24 +1,26 @@
-import React, { useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react'; // Install the '@fullcalendar/react' package
+import React from 'react';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Correct CSS import paths
+import '@fullcalendar/daygrid/package.json';
+import '@fullcalendar/core/package.json';
+import '@fullcalendar/bootstrap/package.json';
 
 const MyCalendar = () => {
-  useEffect(() => {
-    const calendarEl = document.getElementById('bsb-calendar-1');
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-      themeSystem: 'bootstrap5',
-      initialView: 'dayGridMonth',
-      fixedWeekCount: false,
-      headerToolbar: {
+  return (
+    <FullCalendar
+      plugins={[dayGridPlugin, bootstrapPlugin]}
+      initialView="dayGridMonth"
+      themeSystem="bootstrap"
+      headerToolbar={{
         start: 'title',
         center: '',
         end: 'prev,next',
-      },
-    });
-    calendar.render();
-  }, []);
-
-  return (
-    <div id="bsb-calendar-1"></div>
+      }}
+      fixedWeekCount={false}
+    />
   );
 };
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import ApexCharts from 'react-apexcharts'; // Install the 'react-apexcharts' package
+import ApexCharts from 'react-apexcharts'; // Ensure 'react-apexcharts' is installed
 
-const MyBarChart3 = () => {
+const MyDeviceStatsBarChart = () => {
   const chartOptions = {
     series: [
-      { name: 'Net Profit', data: [44, 55, 57, 56, 61, 58] },
-      { name: 'Revenue', data: [76, 85, 101, 98, 87, 105] },
-      { name: 'Free Cash Flow', data: [35, 41, 36, 26, 45, 48] },
+      { name: 'Mobile', data: [120, 130, 150, 170, 180, 190] },
+      { name: 'Tablet', data: [60, 70, 80, 90, 100, 110] },
+      { name: 'Desktop', data: [200, 210, 230, 250, 260, 270] },
     ],
     legend: { position: 'bottom' },
     theme: { palette: 'palette1' },
@@ -20,12 +20,12 @@ const MyBarChart3 = () => {
     },
     dataLabels: { enabled: false },
     stroke: { show: true, width: 2, colors: ['transparent'] },
-    xaxis: { categories: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'] },
-    yaxis: { title: { text: '$ (thousands)' } },
+    xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'] },
+    yaxis: { title: { text: 'Usage (thousands)' } },
     fill: { opacity: 1 },
     tooltip: {
       y: {
-        formatter: (value) => `$ ${value} thousands`,
+        formatter: (value) => `${value} thousands`,
       },
     },
   };
@@ -35,4 +35,4 @@ const MyBarChart3 = () => {
   );
 };
 
-export default MyBarChart3;
+export default MyDeviceStatsBarChart;

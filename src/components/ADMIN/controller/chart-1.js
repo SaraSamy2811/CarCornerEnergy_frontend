@@ -5,12 +5,20 @@ const MyChart1 = () => {
   const chartOptions = {
     series: [
       {
-        name: 'Sales ($)',
+        name: 'Visitors',
         data: [
-          { x: 'Jan', y: 1965 },
-          { x: 'Feb', y: 1895 },
-          { x: 'Mar', y: 2187 },
-          // ... add other data points
+          { x: 'Jan', y: 1200 },
+          { x: 'Feb', y: 1500 },
+          { x: 'Mar', y: 1700 },
+          { x: 'Apr', y: 1800 },
+          { x: 'May', y: 1600 },
+          { x: 'Jun', y: 1900 },
+          { x: 'Jul', y: 2000 },
+          { x: 'Aug', y: 2200 },
+          { x: 'Sep', y: 2100 },
+          { x: 'Oct', y: 2300 },
+          { x: 'Nov', y: 2400 },
+          { x: 'Dec', y: 2500 },
         ],
       },
     ],
@@ -46,22 +54,14 @@ const MyChart1 = () => {
       type: 'category',
       labels: {
         style: {
-          colors: [
-            '#a1aab2',
-            '#a1aab2',
-            // ... add other label colors
-          ],
+          colors: Array(12).fill('#a1aab2'),
         },
       },
     },
     yaxis: {
       labels: {
         style: {
-          colors: [
-            '#a1aab2',
-            '#a1aab2',
-            // ... add other label colors
-          ],
+          colors: Array(10).fill('#a1aab2'),
         },
       },
     },

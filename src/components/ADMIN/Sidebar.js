@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import 
-{BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
-  BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
+{ BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill}
  from 'react-icons/bs'
  import Logo from '../../assests/imges/logo.png'
 
@@ -37,21 +36,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                     <BsPeopleFill className='icon'/> Manage Users
                     </Link>
             </li>
-            <li className='sidebar-list-item'>
-            <Link to="/Admin">
-                    <BsListCheck className='icon'/> Inventory
-                    </Link>
-            </li>
-            <li className='sidebar-list-item'>
-            <Link to="/Admin">
-                    <BsMenuButtonWideFill className='icon'/> Reports
-                    </Link>
-            </li>
-            <li className='sidebar-list-item'>
-            <Link to="/Admin">
-                    <BsFillGearFill className='icon'/> Setting
-                    </Link>
-            </li>
+            
         </ul>
     </aside>
   )

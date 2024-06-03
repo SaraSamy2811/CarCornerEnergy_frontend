@@ -100,7 +100,7 @@ const Offers = () => {
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <h1 className="my-5 display-3 fw-bold ls-tight">
                   The best offer <br />
-                  <span className="text-warning">for your business</span>
+                  <span className="text-warning">Match your needs</span>
                 </h1>
                 <p className="text-color">
                   

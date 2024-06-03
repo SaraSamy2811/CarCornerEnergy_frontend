@@ -2,8 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "../css/ManageStations.css";
+<<<<<<< HEAD
 import StationRow from "./StationRow";
 import { useParams } from 'react-router-dom';
+=======
+import StationRow from './StationRow';
+import 
+{ ResponsiveContainer } 
+from 'recharts';
+import FooterAdmin from '../FooterAdmin';
+>>>>>>> 12a47d4e37624fde6045ece61c4f444a83f6d6f4
 
 const mapContainerStyle = {
   width: "100%",
@@ -126,6 +134,7 @@ const YourComponent = (props) => {
         </tbody>
       </table>
 
+<<<<<<< HEAD
       <div className="container-add-stations">
         <h2>Add a station</h2>
         <form onSubmit={handleSubmit}>
@@ -162,6 +171,14 @@ const YourComponent = (props) => {
       <button type="submit">Add Station</button>
     </form>
       </div>
+=======
+       
+      </form>
+
+    </div>
+    <ResponsiveContainer><FooterAdmin/> </ResponsiveContainer>
+        
+>>>>>>> 12a47d4e37624fde6045ece61c4f444a83f6d6f4
     </div>
   );
 }
