@@ -1,7 +1,9 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "../css/ManageStations.css";
-import StationRow from './StationRow';
+import StationRow from "./StationRow";
+import { useParams } from 'react-router-dom';
 
 const mapContainerStyle = {
   width: "100%",
@@ -13,142 +15,155 @@ const center = {
   lng: -79.1766, // Default longitude
 };
 
-function ManageStations() {
+const YourComponent = (props) => {
+  let {_id}= useParams();
+  const [StationName, setStationName] = useState("");
+  const [coordinates, setCoordinates] = useState([]);
+  const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
+  const [marker, setMarker] = useState(props.center);
   const [stations, setStations] = useState([]);
 
   useEffect(() => {
-    // Fetch data from your database here
-    // Example static data:
     const fetchData = async () => {
-      const data = [
-        { id: 1, name: 'Station 1', coordinates: '123,456', address: 'Address 1', description: 'Description 1' },
-        { id: 2, name: 'Station 2', coordinates: '789,012', address: 'Address 2', description: 'Description 2' },
-      ];
-      setStations(data);
+      try {
+        const response = await axios.get("/api/v1/stations/getAllStations");
+        setStations(response.data.data); // Assuming the data array is under 'data' key
+        alert("Data fetched successfully");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        alert("Failed to fetch data");
+      }
     };
     fetchData();
   }, []);
 
-  const handleDelete = (id) => {
-    setStations(stations.filter(station => station.id !== id));
+  const handleDelete = (stationId) => {
+    if (window.confirm("Are you sure you want to delete this station?")) {
+      axios.delete(`/api/v1/stations/${stationId}`)
+        .then(() => {
+          setStations(stations.filter((station) => station._id !== stationId));
+          alert("Station deleted successfully");
+        })
+        .catch((error) => {
+          console.error("Error deleting station:", error);
+          alert("Failed to delete station");
+        });
+    }
   };
+  
 
   const handleEdit = (updatedStation) => {
-    setStations(stations.map(station => station.id === updatedStation.id ? updatedStation : station));
+    axios.put(`/api/v1/stations/update/${updatedStation._id}`, updatedStation)
+      .then(() => {
+        setStations(stations.map((station) => station._id === updatedStation._id ? updatedStation : station));
+        alert("Station updated successfully");
+      })
+      .catch((error) => {
+        console.error("Error updating station:", error);
+        alert("Failed to update station");
+      });
   };
-
-/////////////////
-
-
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "YOUR_GOOGLE_MAPS_API_KEY", // Replace with your API key
-  });
-
-  const [placeName, setPlaceName] = useState("");
-  const [Coordianates, setCoordianates] = useState("");
-  const [address, setAddress] = useState("");
-  const [Description, setDescription] = useState("");
-  const [marker, setMarker] = useState(center);
-
-  const handleMapClick = (event) => {
-    setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-  };
+  
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Place Details:", { placeName, Coordianates, address, Description, marker });
-    // Add functionality to submit the data to the server or API here
-  };
+    const newStation = { StationName, coordinates, address, description, marker };
 
-  if (loadError) return <div>Error loading maps</div>;
-  if (!isLoaded) return <div>Loading Maps</div>;
+    // Validate coordinates before sending
+    if (coordinates.length !== 2 || isNaN(coordinates[0]) || isNaN(coordinates[1])) {
+        alert("Please enter valid coordinates.");
+        return;
+    }
+
+    axios.post("/api/v1/stations/pin-station", newStation)
+        .then(() => {
+            setStations([...stations, newStation]);
+            setStationName("");
+            setCoordinates([]);
+            setAddress("");
+            setDescription("");
+            setMarker(props.center);
+            alert("Station added successfully");
+        })
+        .catch((error) => {
+            console.error("Error adding station:", error);
+            alert("Failed to add station");
+        });
+};
 
 
- 
+  // const handleMapClick = (event) => {
+  //   setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+  // };
+
+  // if (loadError) return <div>Error loading maps</div>;
+  // if (!isLoaded) return <div>Loading Maps</div>;
+
   return (
-      <div>
-    <table>
-    <thead>
-      <tr>
-        <th>Station Name</th>
-        <th>Coordinates</th>
-        <th>Address</th>
-        <th>Description</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {stations.map(station => (
-        <StationRow
-          key={station.id}
-          station={station}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-        />
-      ))}
-    </tbody>
-  </table>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Station Name</th>
+            <th>Coordinates</th>
+            <th>Address</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {stations.map(station => (
+  <StationRow
+    key={station._id}
+    station={station}
+    onDelete={() => handleDelete(station._id)} 
+    onEdit={() => handleEdit(station)}
+  />
+))}
 
-    <div className="container-add-stations">
-      <h2>Add a station</h2>
-      <form onSubmit={handleSubmit} className="place-form">
-        <div className="form-group">
-          <label>station name (required)*</label>
-          <input
-            type="text"
-            value={placeName}
-            onChange={(e) => setPlaceName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Coordianates (required)*</label>
-          <input
-            type="text"
-            value={Coordianates}
-            onChange={(e) => setCoordianates(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Address (required)*</label>
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <input
-            type="text"
-            value={Description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Map Location</label>
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={15}
-            center={marker}
-            onClick={handleMapClick}
-          >
-            <Marker position={marker} />
-          </GoogleMap>
-          <button type="button" onClick={() => setMarker(center)}>
-            Edit map location
-          </button>
-        </div>
-       
-        <button type="submit">Submit</button>
+        </tbody>
+      </table>
 
-       
-      </form>
-    </div>
+      <div className="container-add-stations">
+        <h2>Add a station</h2>
+        <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={StationName}
+        onChange={(e) => setStationName(e.target.value)}
+        placeholder="Station Name"
+        required
+      />
+      <input
+        type="text"
+        value={coordinates.join(',')}
+        onChange={(e) => {
+          const coords = e.target.value.split(',').map(Number);
+          setCoordinates(coords);
+        }}
+        placeholder="Coordinates (e.g., longitude,latitude)"
+        required
+      />
+      <input
+        type="text"
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
+        placeholder="Address"
+        required
+      />
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        placeholder="Description"
+      />
+      <button type="submit">Add Station</button>
+    </form>
+      </div>
     </div>
   );
 }
 
-export default ManageStations;
+export default  YourComponent;

@@ -53,7 +53,7 @@ const handleLogin = async () => {
       
       //alert('Login successful!,,Happy to see you again use promocode(promo5)');
       // window.location.href = './HomeForUser';
-      if (email === 'admin11@gmail.com') {
+      if (email === 'admin889911@gmail.com') {
       // If the user role is admin, redirect to the admin page
        
         window.location.href = './ADMIN';
