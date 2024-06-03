@@ -75,6 +75,10 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Form } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import 
+{ ResponsiveContainer} 
+from 'recharts';
+import FooterAdmin from '../FooterAdmin';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 const ManageCoupons = () => {
