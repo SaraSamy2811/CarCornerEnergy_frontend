@@ -24,6 +24,49 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 function MyLocationMap() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [make, setMake] = useState('');
+    const [model, setModel] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        fetchUserProfile();
+    }, []);
+
+    const fetchUserProfile = async () => {
+        setLoading(true);
+
+        try {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                setError('User not authenticated');
+                setLoading(false);
+                return;
+            }
+            const response = await axios.get('/api/v1/users/getMe', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const userData = response.data.data;
+            setName(userData.name);
+            setEmail(userData.email);
+            setPhone(userData.phone);
+            setMake(userData.make);
+            setModel(userData.model);
+            setLoading(false);
+            alert('Your profile data has been successfully fetched!');
+        } catch (error) {
+            alert('Failed to fetch profile data!');
+            setError('An error occurred while fetching user profile.');
+            console.error('Error fetching user profile:', error);
+            setLoading(false);
+        }
+    };
+
     const [position, setPosition] = useState({ latitude: null, longitude: null });
     const [nearestStation, setNearestStation] = useState(null);
     const [distanceToNearestStation, setDistanceToNearestStation] = useState(null);
@@ -36,6 +79,7 @@ function MyLocationMap() {
     const [showNearestStation, setShowNearestStation] = useState(false);
     const [showUserMarker, setShowUserMarker] = useState(false);
     const [showStationInfo, setShowStationInfo] = useState(false);
+    const [energyConsumption, setEnergyConsumption] = useState(null);
 
     useEffect(() => {
         if ("geolocation" in navigator) {
@@ -48,7 +92,6 @@ function MyLocationMap() {
             });
         } else {
             console.log("Your browser does not support geolocation.");
-            // Set default center if geolocation is not available
             setMapCenter([0, 0]);
         }
 
@@ -89,13 +132,32 @@ function MyLocationMap() {
         }
     };
 
-    const handleStart = () => {
+    const handleStart = async () => {
         if (nearestStation) {
             setRoute([[position.latitude, position.longitude], [nearestStation.station.coordinates[1], nearestStation.station.coordinates[0]]]);
             setShowStationInfo(false);
-            mapRef.current.invalidateSize(); // Update map size to show user location
+            mapRef.current.invalidateSize();
+    
+            // Send data to the backend for prediction
+            try {
+                const response = await axios.post('http://127.0.0.1:8000/predict', {
+                    make: make,
+                    model: model,
+                    distance: distanceToNearestStation
+                });
+    
+                if (response.data.error) {
+                    throw new Error(response.data.error);
+                }
+    
+                setEnergyConsumption(response.data.energy_consumption);
+            } catch (error) {
+                console.error('Error fetching prediction:', error);
+                alert('Failed to fetch prediction data: ' + error.message);
+            }
         }
     };
+    
 
     return (
         <div style={{ position: 'relative', height: '100vh' }}>
@@ -162,13 +224,18 @@ function MyLocationMap() {
                         <p><strong>Description:</strong> {nearestStation.description}</p>
                     </div>
                 )}
+                {energyConsumption !== null && (
+                    <div style={{ marginTop: '20px' }}>
+                        <h3 style={{ color: '#343a40' }}>Energy Consumption Prediction</h3>
+                        <p><strong>Predicted Energy Consumption:</strong> {energyConsumption} kWh</p>
+                    </div>
+                )}
             </div>
         </div>
     );
 }
 
 export default MyLocationMap;
-
 
 
 
