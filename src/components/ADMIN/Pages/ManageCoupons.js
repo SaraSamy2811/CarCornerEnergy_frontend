@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import React, { useState } from 'react';
 // import { Table, Button, Form } from 'react-bootstrap';
 // import DatePicker from 'react-datepicker';
@@ -78,17 +77,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-=======
-import React, { useState } from 'react';
-import { Table, Button, Form } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import 
-{ ResponsiveContainer} 
-from 'recharts';
-import FooterAdmin from '../FooterAdmin';
-
->>>>>>> 12a47d4e37624fde6045ece61c4f444a83f6d6f4
 const ManageCoupons = () => {
   let {_id}= useParams();
   const [Coupons, setCoupons] = useState([]);
