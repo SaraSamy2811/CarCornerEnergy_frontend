@@ -56,7 +56,8 @@
 import React from 'react';
 function Footer() {
   return (
-    <div >
+    <div style = {{marginTop:'100px'}}
+     >
       {/* Footer */}
       <footer className="footer py-3 border-top border-dark-subtle">
         <div className="container">
