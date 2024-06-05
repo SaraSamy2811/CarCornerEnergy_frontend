@@ -1,4 +1,90 @@
-// import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
+import { Table, Button, Form } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import 
+{ ResponsiveContainer} 
+from 'recharts';
+import FooterAdmin from '../FooterAdmin';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+const ManageCoupons = () => {
+  let {_id}= useParams();
+  const [Coupons, setCoupons] = useState([]);
+  const [newCoupon, setNewCoupon] = useState({ name: '', expire: new Date(), discount: '' });
+  const [editCouponId, setEditCouponId] = useState(null);
+  const [editCouponData, setEditCouponData] = useState({ name: '', expire: new Date(), discount: '' });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/v1/coupons");
+        setCoupons(response.data.data);
+        alert("Data fetched successfully");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        alert("Failed to fetch data");
+      }
+    };
+    fetchData();
+  }, []);
+  
+  const handleAddCoupon = () => {
+    axios.post('/api/v1/coupons', newCoupon)
+      .then(response => {
+        setCoupons([...Coupons, response.data.coupon]); 
+        setNewCoupon({ name: '', expire: new Date(), discount: '' });
+        alert('Coupon added successfully');
+      })
+      .catch(error => {
+        console.error('Error adding coupon:', error);
+        alert('Coupon added failed');
+      });
+  };
+  
+
+  const handleDeleteCoupon = (CouponId) => {
+    if (window.confirm("Are you sure you want to delete this coupon?")) {
+      axios.delete(`/api/v1/coupons/${CouponId}`)
+        .then(() => {
+          setCoupons(Coupons.filter(Coupon => Coupon._id !== CouponId));
+          alert('Coupon deleted successfully');
+        })
+        .catch(error => {
+          console.error('Error deleting Coupon:', error);
+          alert('Failed to delete Coupon');
+        });
+    }
+  };
+  
+  const handleEditClick = (Coupon) => {
+    setEditCouponId(Coupon._id);
+    setEditCouponData({ name: Coupon.name, expire: new Date(Coupon.expire),
+        discount: Coupon.discount });
+  };
+
+  const handleSaveEdit = () => {
+    axios.put(`/api/v1/coupons/${editCouponId}`, editCouponData)
+      .then(() => {
+        setCoupons(Coupons.map(coupon =>
+          coupon._id === editCouponId ? { ...coupon, ...editCouponData } : coupon
+        ));
+        setEditCouponId(null);
+        alert('Coupon updated successfully');
+      })
+      .catch(error => {
+        console.error('Error updating Coupon:', error);
+        alert('Coupon updated failed');
+      });
+  };
+  
+
+
+
+
+
+  // import React, { useState } from 'react';
 // import { Table, Button, Form } from 'react-bootstrap';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
@@ -71,86 +157,10 @@
 // };
 
 // export default ManageCoupons;
-import React, { useState, useEffect } from 'react';
-import { Table, Button, Form } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import 
-{ ResponsiveContainer} 
-from 'recharts';
-import FooterAdmin from '../FooterAdmin';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-const ManageCoupons = () => {
-  let {_id}= useParams();
-  const [Coupons, setCoupons] = useState([]);
-  const [newCoupon, setNewCoupon] = useState({ name: '', expire: new Date(), discount: '' });
-  const [editCouponId, setEditCouponId] = useState(null);
-  const [editCouponData, setEditCouponData] = useState({ name: '', expire: new Date(), discount: '' });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/v1/coupons");
-        setCoupons(response.data.data);
-        alert("Data fetched successfully");
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        alert("Failed to fetch data");
-      }
-    };
-    fetchData();
-  }, []);
-  
-  const handleAddCoupon = () => {
-    axios.post('/api/v1/coupons', newCoupon)
-      .then(response => {
-        setCoupons([...Coupons, response.data.coupon]); // Assuming the response contains the coupon object
-        setNewCoupon({ name: '', expire: new Date(), discount: '' });
-        alert('Coupon added successfully');
-      })
-      .catch(error => {
-        console.error('Error adding coupon:', error);
-        alert('Coupon added failed');
-      });
-  };
-  
 
-  const handleDeleteCoupon = (CouponId) => {
-    if (window.confirm("Are you sure you want to delete this coupon?")) {
-      axios.delete(`/api/v1/coupons/${CouponId}`)
-        .then(() => {
-          setCoupons(Coupons.filter(Coupon => Coupon._id !== CouponId));
-          alert('Coupon deleted successfully');
-        })
-        .catch(error => {
-          console.error('Error deleting Coupon:', error);
-          alert('Failed to delete Coupon');
-        });
-    }
-  };
-  
-  const handleEditClick = (Coupon) => {
-    setEditCouponId(Coupon._id);
-    setEditCouponData({ name: Coupon.name, expire: new Date(Coupon.expire), discount: Coupon.discount });
-  };
-  
-  
-  const handleSaveEdit = () => {
-    axios.put(`/api/v1/coupons/${editCouponId}`, editCouponData)
-      .then(() => {
-        setCoupons(Coupons.map(coupon =>
-          coupon._id === editCouponId ? { ...coupon, ...editCouponData } : coupon
-        ));
-        setEditCouponId(null);
-        alert('Coupon updated successfully');
-      })
-      .catch(error => {
-        console.error('Error updating Coupon:', error);
-        alert('Coupon updated failed');
-      });
-  };
-  
+
+
   return (
     <div className="container mt-5">
       <h2>Coupons Table</h2>

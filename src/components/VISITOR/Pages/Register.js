@@ -9,7 +9,6 @@ import axios from 'axios';
 
 function Register() {
   
- 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +17,6 @@ function Register() {
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   const [role, setRole] = useState('');
-  
   const [registrationError, setRegistrationError] = useState('');
   const [formCompleted, setFormCompleted] = useState(false);
 
@@ -30,14 +28,12 @@ function Register() {
     else if (name === 'email') {
       setEmail(value);
     } 
-    
     else if (name === 'phone') {
       setPhone(value);
     }
     else if (name === 'password') {
       setPassword(value);
     }
-    
     else if (name === 'passwordConfirm') {
       setPasswordConfirm(value);
     } 
@@ -63,6 +59,7 @@ function Register() {
       return;
     }
 /////////////////////////  new try  code
+
     try {
       const userData = { name, email, password, passwordConfirm, phone, make,model };
       const response = await axios.post('/api/v1/auth/signup', userData);

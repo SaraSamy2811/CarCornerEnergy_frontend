@@ -110,7 +110,8 @@ function MyLocationMap() {
         let nearest = null;
         let minDistance = Number.MAX_VALUE;
         gasStations.forEach(station => {
-            const distance = calculateDistance(position.latitude, position.longitude, station.station.coordinates[1], station.station.coordinates[0]);
+            const distance = calculateDistance(position.latitude, position.longitude,
+                station.station.coordinates[1], station.station.coordinates[0]);
             if (distance < minDistance) {
                 minDistance = distance;
                 nearest = station;
@@ -134,7 +135,8 @@ function MyLocationMap() {
 
     const handleStart = async () => {
         if (nearestStation) {
-            setRoute([[position.latitude, position.longitude], [nearestStation.station.coordinates[1], nearestStation.station.coordinates[0]]]);
+            setRoute([[position.latitude, position.longitude], [nearestStation.station.coordinates[1], 
+                nearestStation.station.coordinates[0]]]);
             setShowStationInfo(false);
             mapRef.current.invalidateSize();
     

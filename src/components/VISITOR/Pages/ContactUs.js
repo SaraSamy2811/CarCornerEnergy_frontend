@@ -21,7 +21,7 @@ function ContactUs() {
             const response = await axios.post('api/v1/contact/contact', formData);
             console.log(response.data); 
             alert('Message sent successfully!');
-            setFormData({ fullname: '', email: '', phone: '', message: '' }); // Clear form after sending
+            setFormData({ fullname: '', email: '', phone: '', message: '' }); 
         } catch (error) {
             console.error('Error submitting form:', error);
             alert('Error in sending message');

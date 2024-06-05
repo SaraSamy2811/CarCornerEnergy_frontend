@@ -56,7 +56,8 @@ const YourComponent = (props) => {
   const handleEdit = (updatedStation) => {
     axios.put(`/api/v1/stations/update/${updatedStation._id}`, updatedStation)
       .then(() => {
-        setStations(stations.map((station) => station._id === updatedStation._id ? updatedStation : station));
+        setStations(stations.map((station) => station._id === 
+        updatedStation._id ? updatedStation : station));
         alert("Station updated successfully");
       })
       .catch((error) => {

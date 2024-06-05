@@ -30,10 +30,9 @@ const [password, setPassword] = useState('')
       setPassword(value);
     }
   };
+  
  
-
-
-
+  
 const handleLogin = async () => {
 
   if ( !email ||  !password) {
@@ -53,7 +52,7 @@ const handleLogin = async () => {
       
       //alert('Login successful!,,Happy to see you again use promocode(promo5)');
       // window.location.href = './HomeForUser';
-      if (email === 'admin889911@gmail.com') {
+      if (email === 'admin@gmail.com') {
       // If the user role is admin, redirect to the admin page
        
         window.location.href = './ADMIN';

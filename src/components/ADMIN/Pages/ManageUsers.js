@@ -51,8 +51,10 @@ function ManageUsers() {
             });
     }, []);
 
+
+
 	const handleEdit = (user) => {
-		setEditingId(user._id); // Update the editingId with the user's _id
+		setEditingId(user._id); 
 		setFormData({
 			name: user.name,
 			created: user.created,
@@ -63,10 +65,7 @@ function ManageUsers() {
 			make: user.make,
 			model: user.model
 		});
-	};
-	
-
-    
+	}; 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });

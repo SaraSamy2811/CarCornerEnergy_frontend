@@ -4,6 +4,8 @@ import axios from 'axios';
 import LoginImage from '../../../assests/imges/pexels-photo-12205370.jpeg';
 import Logo from '../../../assests/imges/logo2.png';
 import '../css/Login.css';
+
+
 function ResetPassword() {
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
