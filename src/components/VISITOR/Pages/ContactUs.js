@@ -1,6 +1,6 @@
 
 import React , { useState }from 'react';
-import Background from '../../../assests/imges/background.jpg';
+import backgroundImage from '../../../assests/imges/background.jpg';
 //import '../css/Home.css';
 import axios from 'axios';
 function ContactUs() {
@@ -29,23 +29,18 @@ function ContactUs() {
     };
 
     return (
-        <div style={{ position: 'relative' }}>
-            <div style={{ backgroundImage: `url(${Background})`, height: "300px" ,backgroundSize: "cover", backgroundPosition: "center" }}>
-                {/* Background image */}
-            </div>
-            
-            <section className="bg-light py-3 py-md-5" style={{ marginTop: "-120px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(10px)", borderRadius: '20px', maxWidth: '1100px', margin: '0 auto' }}>
-                <div className="container">
-                    <div className="row justify-content-md-center">
-                        <div className="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-                            <h2 className="mb-4 display-5 text-center">Contact</h2>
-                            <p className="text-secondary mb-5 text-center">The best way to contact us is to use our contact form below. Please fill out all of the required fields and we will get back to you as soon as possible.</p>
-                            <hr className="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle"/>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="container">
+       
+            <div>
+    <section className="text-center">
+    <div className="p-5 bg-image" style={{ backgroundImage:`url(${backgroundImage})`, height: "300px" ,backgroundSize: "cover", backgroundPosition: "center" }}></div>
+    <div className="card mx-4 mx-md-5 shadow-5-strong" style={{ marginTop: "-100px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(10px)", maxWidth: "92.5%" }}>
+      <div className="card-body py-5 px-md-5">
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-8">
+            <h2 className="fw-bold mb-5">Contact</h2>
+            <p className="text-secondary mb-5 text-center">The best way to contact us is to use our contact form below. Please fill out all of the required fields and we will get back to you as soon as possible.</p>
+             <hr className="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle"/>
+                
                     <div className="row justify-content-lg-center">
                         <div className="col-12 col-lg-9">
                             <div className="bg-white border rounded shadow-sm overflow-hidden">
@@ -90,7 +85,11 @@ function ContactUs() {
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    
+                </div>
+                </div>
+                </div>
+                </div>
                 </div>
             </section>
         </div>

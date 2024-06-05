@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from "../../assests/imges/logo.png";
-// Initialization for ES Users
-import { Collapse, Ripple, initMDB } from "mdb-ui-kit";
+import { Collapse, Ripple, initMDB } from 'mdb-ui-kit'; // Ensure these are correctly imported
+
 import axios from 'axios';
 
-
 initMDB({ Collapse, Ripple });
-
 
 function HeaderForUser() {
     const handleLogout = async () => {
@@ -15,25 +13,23 @@ function HeaderForUser() {
         if (confirmed) {
             try {
                 await axios.post('/api/v1/auth/logout');
-                
-                window.location.href = '/Home'; 
+                window.location.href = '/Home';
             } catch (error) {
                 console.error('Error logging out:', error);
-                
             }
         }
     };
+
     return (
         <div>
-
             {/* Navbar */}
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: 'black' }}>
                 {/* Container wrapper */}
                 <div className="container-fluid">
                     {/* Navbar brand */}
                     <Link className="navbar-brand me-2" to="/user">
                         <img
-                            src={Logo} // Corrected logo reference
+                            src={Logo}
                             height="35"
                             alt="MDB Logo"
                             loading="lazy"
@@ -45,6 +41,7 @@ function HeaderForUser() {
                     <button
                         className="navbar-toggler"
                         type="button"
+                        data-mdb-toggle="collapse"
                         data-mdb-target="#navbarButtonsExample"
                         aria-controls="navbarButtonsExample"
                         aria-expanded="false"
@@ -58,49 +55,28 @@ function HeaderForUser() {
                         {/* Left links */}
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/user/map">Map</Link> {/* Link to Dashboard page */}
+                                <Link className="nav-link" to="/user/map">Map</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/user/offers">Offers</Link> {/* Example of linking to another page */}
+                                <Link className="nav-link" to="/user/offers">Offers</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/user/EnergyConsumptionPrediction">Model</Link> {/* Example of linking to yet another page */}
+                                <Link className="nav-link" to="/user/review">Review</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/user/profile">My Profile</Link>
                             </li>
                         </ul>
 
                         <div className="d-flex align-items-center">
-                        <button type="button" className="btn btn-link px-3 me-2">
-                                <Link to="/user/review">Review</Link> {/* Link to the review page */}
+                            
+                            <button type="button" className="btn btn-warning me-3" onClick={handleLogout}>
+                                Logout
                             </button>
-
-{/* Avatar */}
-<div className="avatar me-3">
-    <Link to="/user/profile">
-        <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
-            className="rounded-circle"
-            height="32"
-            alt="Avatar"
-            loading="lazy"
-        />
-    </Link>
-</div>
-
-<button type="button" className="btn btn-warning me-3" onClick={handleLogout}>
-            Logout
-        </button>
-                            
-
-        
-
-                            
                         </div>
                     </div>
-                    {/* Collapsible wrapper */}
                 </div>
-                {/* Container wrapper */}
             </nav>
-            {/* Navbar */}
         </div>
     );
 }
