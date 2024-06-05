@@ -1,6 +1,7 @@
 import React from 'react';
 import VideoBackground from '../../videobackground/VideoBackground.js';
 import '../css/Home.css';
+import CarPhoto from '../../../assests/imges/eren-goldman-mfqj3ZSs_h0-unsplash-removebg-preview.png';
 
 
 function Home() {
@@ -13,8 +14,8 @@ function Home() {
                         <h2>Welcome to Car-Corner Energy</h2>
                         <p className='home_p'>Discover the future of sustainable transportation with Car-Corner Energy. Our comprehensive website empowers electric car owners to easily locate the nearest charging stations, access real-time pricing, and take advantage of exclusive offers.</p>
                     </div>
-                    <div className="home-photo">
-                        <img src="./vecteezy_sport-car-isolated-on-transparent-background-3d-rendering_19069771.png" alt="Electric Car Charging at Car-Corner Energy" />
+                    <div className="home-photo"style={{marginLeft:'200px'}}>
+                        <img src={CarPhoto}  alt="Electric Car Charging at Car-Corner Energy" />
                     </div>
                 </div>
                 <div className="additional-section">
