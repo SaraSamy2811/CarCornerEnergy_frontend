@@ -162,7 +162,7 @@ function MyLocationMap() {
     
 
     return (
-        <div style={{ position: 'relative', height: '100vh' }}>
+        <div style={{ position: 'relative', height: '100vh' , marginTop: "-128px" ,marginBottom:'-100px'}}>
             <MapContainer ref={mapRef} center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
