@@ -1,5 +1,6 @@
 import React from 'react'
 import './HomeForUser.css'
+import backgroundImage from '../../../assests/imges/background.jpg';
   // Define your questions and answers here
   const questions = [
 
@@ -82,9 +83,16 @@ import './HomeForUser.css'
   ];
 function HomeForUser() {
   return (
-    <div className="home-section">
-      <h1>List of charging stations for electric vehicles in Egypt. Find the nearest EV charger for your electric car in Egypt </h1>
-      <h3>there are 48 charging stations for electric cars in Egypt :</h3>
+    <div >
+    <section className="text-center">
+    <div className="p-5 bg-image" style={{ backgroundImage:`url(${backgroundImage})`, height: "300px" ,backgroundSize: "cover", backgroundPosition: "center" }}></div>
+    <div className="card mx-4 mx-md-5 shadow-5-strong" style={{ marginTop: "-100px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(10px)", maxWidth: "92.5%" }}>
+      <div className="card-body py-5 px-md-5">
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-12">
+            <h2 className="fw-bold mb-5">List of charging stations for electric vehicles in Egypt. Find the nearest EV charger for your electric car in Egypt</h2>
+            <h3 className="text-secondary mb-5 text-center">there are 48 charging stations for electric cars in Egypt.</h3>
+      
       <div className="home-container">
         {/* Render each question and answer */}
         {questions.map((question, index) => (
@@ -96,6 +104,12 @@ function HomeForUser() {
           </div>
         ))}
       </div>
+      
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
     </div>
   );
   

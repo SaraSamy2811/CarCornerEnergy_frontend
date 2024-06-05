@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './StarRating'; // Import the StarRating component
 import './ReviewApp.css'; // Import your CSS file for styling
+import backgroundImage from '../../../assests/imges/background.jpg';
 
 const ReviewApp = () => {
   const [reviews, setReviews] = useState([]);
@@ -42,20 +43,35 @@ const ReviewApp = () => {
   };
 
   return (
+    <div>
+    <section className="text-center">
+    <div className="p-5 bg-image" style={{ backgroundImage:`url(${backgroundImage})`, height: "300px" ,backgroundSize: "cover", backgroundPosition: "center" }}></div>
+    <div className="card mx-4 mx-md-5 shadow-5-strong" style={{ marginTop: "-100px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(10px)", maxWidth: "92.5%" }}>
+      <div className="card-body py-5 px-md-5">
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-8">
+            <h2 className="fw-bold mb-5">Review App</h2>
+
     <div className="containerD">
-      <h1>Review App</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label><br />
-        <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required /><br />
+    <form onSubmit={handleSubmit} className="mt-3">
+  <div className="mb-3">
+    <label htmlFor="title" className="form-label">Title:</label>
+    <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} className="form-control" required />
+  </div>
 
-        <label htmlFor="body">Body:</label><br />
-        <textarea id="body" name="body" value={formData.body} onChange={handleChange} required /><br />
+  <div className="mb-3">
+    <label htmlFor="body" className="form-label">Body:</label>
+    <textarea id="body" name="body" value={formData.body} onChange={handleChange} className="form-control" required />
+  </div>
 
-        <label htmlFor="rating">Rating:</label><br />
-        <input type="number" id="rating" name="rating" min="1" max="5" value={formData.rating} onChange={handleChange} required /><br />
+  <div className="mb-3">
+    <label htmlFor="rating" className="form-label">Rating:</label>
+    <input type="number" id="rating" name="rating" min="1" max="5" value={formData.rating} onChange={handleChange} className="form-control" required />
+  </div>
 
-        <button type="submit">Submit Review</button>
-      </form>
+  <button type="submit" className="btn btn-warning">Submit Review</button>
+</form>
+
 
       <div className="cardd-container">
         {reviews.map((review) => (
@@ -69,6 +85,13 @@ const ReviewApp = () => {
         ))}
       </div>
     </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    </div>
+    
   );
 };
 
