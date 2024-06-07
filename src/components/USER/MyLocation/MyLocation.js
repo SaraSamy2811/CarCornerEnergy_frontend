@@ -46,7 +46,7 @@ function MyLocationMap() {
                 setLoading(false);
                 return;
             }
-            const response = await axios.get('/api/v1/users/getMe', {
+            const response = await axios.get('/api/v1/profile/getMe', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
