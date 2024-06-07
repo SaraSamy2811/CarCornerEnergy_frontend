@@ -62,7 +62,7 @@ const handleLogin = async () => {
       // Display error message
       // setEmailError('Invalid email or password');
       // setPasswordError('Invalid email or password');
-      alert('Login successful!,,Happy to see you again use promocode(promo5)');
+      alert('Login successful!');
       window.location.href = "./USER";
     }
     

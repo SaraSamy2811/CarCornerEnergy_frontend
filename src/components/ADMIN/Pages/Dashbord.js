@@ -1,4 +1,6 @@
 import React from 'react'
+import { useEffect,useState } from 'react';
+import axios from 'axios';
 import 
 { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
  from 'react-icons/bs'
@@ -10,45 +12,131 @@ import Chart1 from '../controller/chart-1';
 import Chart3 from '../controller/chart-3';
 import Chart4 from '../controller/chart-4';
 import MyCalendar from '../controller/calendar-1';
-function  Dashbord() {
 
-   
+
+
+const Dashbord = () => {
+  const [data, setData] = useState({
+    coupons: 0,
+    stations: 0,
+    users: 0,
+    alerts: 0
+  });
+
+  // Fetch coupons data
+  useEffect(() => {
+    const fetchCoupons = async () => {
+      try {
+        const response = await axios.get("/api/v1/coupons");
+        const coupons = response.data.data;
+        setData(prevData => {
+          const newData = { ...prevData, coupons: coupons.length }; // assuming coupons is an array
+          localStorage.setItem('dashboardData', JSON.stringify(newData));
+          return newData;
+        });
+        alert("Coupons data fetched successfully");
+      } catch (error) {
+        console.error("Error fetching coupons data:", error);
+        alert("Failed to fetch coupons data");
+      }
+    };
+    fetchCoupons();
+  }, []);
+
+  // Fetch stations data
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const response = await axios.get("/api/v1/stations/getAllStations");
+        const stations = response.data.data;
+        setData(prevData => {
+          const newData = { ...prevData, stations: stations.length }; // assuming stations is an array
+          localStorage.setItem('dashboardData', JSON.stringify(newData));
+          return newData;
+        });
+        alert("Stations data fetched successfully");
+      } catch (error) {
+        console.error("Error fetching stations data:", error);
+        alert("Failed to fetch stations data");
+      }
+    };
+    fetchStations();
+  }, []);
+
+  // Fetch users data
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('/api/v1/users');
+        const users = response.data.data;
+        setData(prevData => {
+          const newData = { ...prevData, users: users.length }; // assuming users is an array
+          localStorage.setItem('dashboardData', JSON.stringify(newData));
+          return newData;
+        });
+        alert('Users data fetched successfully');
+      } catch (error) {
+        console.error('Error fetching users data:', error);
+        alert('Failed to fetch users data');
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  // Fetch data from local storage on component mount
+  useEffect(() => {
+    const storedData = localStorage.getItem('dashboardData');
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
+  }, []);
+
   return (
     <main className='main-container'>
-        <div className='main-title'>
-            <h3>DASHBOARD</h3>
-        </div>
+      <div className='main-title'>
+        <h3>DASHBOARD</h3>
+      </div>
 
-        <div className='main-cards'>
-            <div className='card-dashbord' style={{ backgroundColor: 'var(--color-dark)' ,color: '#FFFFFF' }}>
-                <div className='card-inner'>
-                    <h3>COUPONES</h3>
-                    <BsFillArchiveFill className='card_icon'/>
-                </div>
-                <h1>300</h1>
-            </div>
-            <div className='card' style={{ backgroundColor: 'var(--color-primary)' }}>
-                <div className='card-inner'>
-                    <h3>STAIONS</h3>
-                    <BsFillGrid3X3GapFill className='card_icon'/>
-                </div>
-                <h1>12</h1>
-            </div>
-            <div className='card' style={{ backgroundColor: 'var(--color-darker)',color: '#FFFFFF' }}>
-                <div className='card-inner'>
-                    <h3>USERS</h3>
-                    <BsPeopleFill className='card_icon'/>
-                </div>
-                <h1>33</h1>
-            </div>
-            <div className='card'style={{ backgroundColor: 'var(--color-light)' }}>
-                <div className='card-inner'>
-                    <h3>ALERTS</h3>
-                    <BsFillBellFill className='card_icon'/>
-                </div>
-                <h1>42</h1>
-            </div>
+      <div className='main-cards'>
+        <div className='card-dashbord' style={{ backgroundColor: 'var(--color-dark)', color: '#FFFFFF' }}>
+          <div className='card-inner'>
+            <h3>COUPONES</h3>
+            <BsFillArchiveFill className='card_icon' />
+          </div>
+          <h1>{data.coupons}</h1>
         </div>
+        <div className='card' style={{ backgroundColor: 'var(--color-primary)' }}>
+          <div className='card-inner'>
+            <h3>STAIONS</h3>
+            <BsFillGrid3X3GapFill className='card_icon' />
+          </div>
+          <h1>{data.stations}</h1>
+        </div>
+        <div className='card' style={{ backgroundColor: 'var(--color-darker)', color: '#FFFFFF' }}>
+          <div className='card-inner'>
+            <h3>USERS</h3>
+            <BsPeopleFill className='card_icon' />
+          </div>
+          <h1>{data.users}</h1>
+        </div>
+        <div className='card' style={{ backgroundColor: 'var(--color-light)' }}>
+          <div className='card-inner'>
+            <h3>Visitor</h3>
+            <BsPeopleFill className='card_icon' />
+          </div>
+          <h1>{data.visitor}</h1>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
 
         <div className="dashboard-container">
       <div className="card-container">

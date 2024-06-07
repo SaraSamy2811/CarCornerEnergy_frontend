@@ -63,8 +63,10 @@ const Offers = () => {
 
   const handlePaymentSubmit = async () => {
     const { nameOnCard, creditCardNumber, expiration, cvv } = paymentData;
-    if (paymentMethod === 'visa' && (!nameOnCard || !creditCardNumber || !expiration || !cvv)) {
+    if (paymentMethod === 'visa' 
+    && (!nameOnCard || !creditCardNumber || !expiration || !cvv)) {
       setPaymentError('Please fill all payment fields.');
+      
       return;
     }
     try {
@@ -127,6 +129,7 @@ const Offers = () => {
                       </div>
                       {(paymentMethod === 'visa' ) &&
                         <div className="form-outline mb-4">
+                       ('use" promo5 to get a discount')
                           <input type="text" id="form3Example3" className="form-control" name="promoCode" value={promoCode} onChange={handleInputChange} />
                           <label className="form-label" htmlFor="form3Example3">Promo Code</label>
                         </div>
