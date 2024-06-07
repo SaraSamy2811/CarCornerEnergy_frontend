@@ -27,6 +27,7 @@ import EiditProfile from './components/USER/Pages/EiditProfile';
 import Model from './REG.MODEL/Model';
 import AdminProfile from './components/ADMIN/Pages/AdminProfile';
 import ManageCoupons from './components/ADMIN/Pages/ManageCoupons';
+import AdminMessages from './components/ADMIN/Pages/AdminMessages';
 
 
 function App() {
@@ -63,7 +64,7 @@ function App() {
             <Route path="/Admin/ManageStations" element={<ManageStations />} />
             <Route path="/Admin/ManageCoupons" element={<ManageCoupons/>} />
             <Route path="/Admin/adminprofile" element={<AdminProfile />} />
-            
+            <Route path="/Admin/adminMessages" element={<AdminMessages />} />
           </Route>
         </Routes>
     

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Background from '../../../assests/imges/background.jpg';
-import { Link } from 'react-router-dom';
 
-function Profile() {
+function AdminProfile() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,7 +12,11 @@ function Profile() {
     avatar: ''
   });
 
-  const [avatarPreview, setAvatarPreview] = useState('https://th.bing.com/th/id/OIP.Oo_9EZ_mdqBnbOIUVHbFAAHaHa?w=1200&h=1200&rs=1&pid=ImgDetMain');
+  const [avatarPreview, setAvatarPreview] = useState(() => {
+    const storedAvatarPreview = localStorage.getItem('avatarPreview');
+    return storedAvatarPreview ? storedAvatarPreview : 'https://th.bing.com/th/id/OIP.Oo_9EZ_mdqBnbOIUVHbFAAHaHa?w=1200&h=1200&rs=1&pid=ImgDetMain';
+  });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isEditing, setIsEditing] = useState(false);
@@ -21,6 +24,10 @@ function Profile() {
   useEffect(() => {
     fetchUserProfile();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('avatarPreview', avatarPreview);
+  }, [avatarPreview]);
 
   const fetchUserProfile = async () => {
     setLoading(true);
@@ -37,7 +44,7 @@ function Profile() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const userData = response.data.data; // Assuming user data is in 'data' field
+      const userData = response.data.data;
       setFormData(userData);
       if (userData.avatar) {
         setAvatarPreview(userData.avatar);
@@ -99,7 +106,7 @@ function Profile() {
       await axios.put('/api/v1/profile/updateMe', updatedUserData, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
         }
       });
 
@@ -208,11 +215,10 @@ function Profile() {
                       ) : (
                         <p className="text-muted mb-0">{formData.make}</p>
                       )}
-                  
-</div>
+                    </div>
                   </div>
-                  <hr />
-                   <div className="row">
+                  <hr/>
+                  <div className="row">
                  <div className="col-sm-3">
                        <p className="mb-0">Model</p>
                     </div>
@@ -220,6 +226,7 @@ function Profile() {
                        {isEditing ? (
                          <input 
                            type="text" 
+                           name="model"
                            value={formData.model} 
                            onChange={handleChange} 
                           className="form-control"
@@ -242,8 +249,7 @@ function Profile() {
         </div>
       </section>
     </div>
-       );
- }
+  );
+}
 
-export default Profile;
-
+export default AdminProfile;

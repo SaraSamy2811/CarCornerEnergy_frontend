@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ApexCharts from 'react-apexcharts';
+import axios from 'axios';
 
 const MyChart1 = () => {
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the backend
+    axios.get('/api/visitors')
+      .then(response => {
+        setChartData(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+      });
+  }, []);
+
   const chartOptions = {
     series: [
       {
         name: 'Visitors',
-        data: [
-          { x: 'Jan', y: 1200 },
-          { x: 'Feb', y: 1500 },
-          { x: 'Mar', y: 1700 },
-          { x: 'Apr', y: 1800 },
-          { x: 'May', y: 1600 },
-          { x: 'Jun', y: 1900 },
-          { x: 'Jul', y: 2000 },
-          { x: 'Aug', y: 2200 },
-          { x: 'Sep', y: 2100 },
-          { x: 'Oct', y: 2300 },
-          { x: 'Nov', y: 2400 },
-          { x: 'Dec', y: 2500 },
-        ],
+        data: chartData,
       },
     ],
     chart: {

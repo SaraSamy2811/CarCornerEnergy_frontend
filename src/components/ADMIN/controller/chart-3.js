@@ -1,13 +1,23 @@
-import React from 'react';
-import ApexCharts from 'react-apexcharts'; // Ensure 'react-apexcharts' is installed
+import React, { useEffect, useState } from 'react';
+import ApexCharts from 'react-apexcharts';
+import axios from 'axios';
 
 const MyDeviceStatsBarChart = () => {
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from the backend
+    axios.get('/api/device-stats')
+      .then(response => {
+        setChartData(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+      });
+  }, []);
+
   const chartOptions = {
-    series: [
-      { name: 'Mobile', data: [120, 130, 150, 170, 180, 190] },
-      { name: 'Tablet', data: [60, 70, 80, 90, 100, 110] },
-      { name: 'Desktop', data: [200, 210, 230, 250, 260, 270] },
-    ],
+    series: chartData,
     legend: { position: 'bottom' },
     theme: { palette: 'palette1' },
     chart: { type: 'bar' },

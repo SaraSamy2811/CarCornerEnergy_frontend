@@ -1,10 +1,24 @@
-import React from 'react';
-import ApexCharts from 'react-apexcharts'; // Install the 'react-apexcharts' package
+import React, { useEffect, useState } from 'react';
+import ApexCharts from 'react-apexcharts';
+import axios from 'axios';
 
 const MyDonutChart4 = () => {
+  const [chartData, setChartData] = useState({ series: [], labels: [] });
+
+  useEffect(() => {
+    // Fetch data from the backend
+    axios.get('/api/donut-chart')
+      .then(response => {
+        setChartData(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the data!', error);
+      });
+  }, []);
+
   const chartOptions = {
-    series: [21, 23, 19, 14, 6],
-    labels: ['Microsoft Edge', 'Google Chrome', 'Fire Fox', 'Safari', 'Opera'],
+    series: chartData.series,
+    labels: chartData.labels,
     legend: { position: 'bottom' },
     theme: { palette: 'palette1' },
     chart: { type: 'donut' },

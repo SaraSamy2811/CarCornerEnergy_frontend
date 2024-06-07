@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import 
-{ BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill ,BsPersonCircle}
+{ BsGrid1X2Fill, BsMap, BsPeopleFill ,BsPersonCircle ,BsChat ,BsGift}
  from 'react-icons/bs'
  import Logo from '../../assests/imges/logo.png'
 
@@ -23,12 +23,12 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
             </li>
             <li className='sidebar-list-item'>
             <Link to="/Admin/ManageCoupons">
-                    <BsFillArchiveFill className='icon'/> Manage Coupons
+                    <BsGift className='icon'/> Manage Coupons
                     </Link>
             </li>
             <li className='sidebar-list-item'>
             <Link to="/Admin/ManageStations">
-                    <BsFillGrid3X3GapFill className='icon'/>Manage Staions 
+                    <BsMap className='icon'/>Manage Staions 
                     </Link>
             </li>
             <li className='sidebar-list-item'>
@@ -39,6 +39,11 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
             <li className='sidebar-list-item'>
                 <Link to="/Admin/AdminProfile">
                     <BsPersonCircle className='icon'/> My Profile
+                    </Link>
+            </li>
+            <li className='sidebar-list-item'>
+                <Link to="/Admin/adminMessages">
+                    <BsChat className='icon'/> messages
                     </Link>
             </li>
             

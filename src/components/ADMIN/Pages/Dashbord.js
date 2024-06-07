@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect,useState } from 'react';
 import axios from 'axios';
 import 
-{ BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill}
+{  BsMap, BsPeopleFill, BsGift}
  from 'react-icons/bs'
  import 
  { ResponsiveContainer} 
@@ -82,7 +82,25 @@ const Dashbord = () => {
     };
     fetchUsers();
   }, []);
-
+// Fetch visitors data
+useEffect(() => {
+  const fetchVisitors = async () => {
+    try {
+      const response = await axios.get('/api/v1/visitors');
+      const visitors = response.data.data;
+      setData(prevData => {
+        const newData = { ...prevData, visitors };
+        localStorage.setItem('dashboardData', JSON.stringify(newData));
+        return newData;
+      });
+      alert('Visitors data fetched successfully');
+    } catch (error) {
+      console.error('Error fetching visitors data:', error);
+      alert('Failed to fetch visitors data');
+    }
+  };
+  fetchVisitors();
+}, []);
   // Fetch data from local storage on component mount
   useEffect(() => {
     const storedData = localStorage.getItem('dashboardData');
@@ -101,14 +119,14 @@ const Dashbord = () => {
         <div className='card-dashbord' style={{ backgroundColor: 'var(--color-dark)', color: '#FFFFFF' }}>
           <div className='card-inner'>
             <h3>COUPONES</h3>
-            <BsFillArchiveFill className='card_icon' />
+            <BsGift className='card_icon' />
           </div>
           <h1>{data.coupons}</h1>
         </div>
         <div className='card' style={{ backgroundColor: 'var(--color-primary)' }}>
           <div className='card-inner'>
             <h3>STAIONS</h3>
-            <BsFillGrid3X3GapFill className='card_icon' />
+            <BsMap className='card_icon' />
           </div>
           <h1>{data.stations}</h1>
         </div>
@@ -124,7 +142,7 @@ const Dashbord = () => {
             <h3>Visitor</h3>
             <BsPeopleFill className='card_icon' />
           </div>
-          <h1>{data.visitor}</h1>
+          <h1>{data.visitors}</h1>
         </div>
       </div>
 
