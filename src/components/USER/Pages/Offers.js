@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Background from '../../../assests/imges/background.jpg';
 
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+
 
 const Offers = () => {
   const [promoCodeError, setPromoCodeError] = useState('');
@@ -16,6 +19,11 @@ const Offers = () => {
     expiration: '',
     cvv: ''
   });
+  const [showAlert, setShowAlert] = useState(false);
+const [alertMessage, setAlertMessage] = useState('');
+const [paymentAlert, setPaymentAlert] = useState(false);
+const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,25 +47,26 @@ const Offers = () => {
     }
 
     try {
-        const response = await axios.get(`/api/v1/coupons/${promoCode}`);
-
-        if (response.status >= 200 && response.status < 300) {
-            alert('PromoCode successful!');
-            // Handle further actions upon successful promo code verification
-        } else {
-            const errorMessage = response.data.msg || 'An error occurred while sending the promoCode.';
-            setPromoCodeError(errorMessage);
-        }
-    } catch (error) {
-        if (error.response) {
-            const errorMessage = error.response.data.msg || 'An error occurred while sending the promoCode.';
-            setPromoCodeError(errorMessage);
-        } else if (error.request) {
-            setPromoCodeError('No response received from the server.');
-        } else {
-            setPromoCodeError('An error occurred while processing the request.');
-        }
-    }
+      const response = await axios.get(`/api/v1/coupons/${promoCode}`);
+      if (response.status >= 200 && response.status < 300) {
+          setShowAlert(true);
+          setAlertMessage('PromoCode successful!');
+          // Handle further actions upon successful promo code verification
+      } else {
+          const errorMessage = response.data.msg || 'An error occurred while sending the promoCode.';
+          setPromoCodeError(errorMessage);
+      }
+  } catch (error) {
+      if (error.response) {
+          const errorMessage = error.response.data.msg || 'An error occurred while sending the promoCode.';
+          setPromoCodeError(errorMessage);
+      } else if (error.request) {
+          setPromoCodeError('No response received from the server.');
+      } else {
+          setPromoCodeError('An error occurred while processing the request.');
+      }
+  }
+  
 };
 
 
@@ -71,7 +80,8 @@ const Offers = () => {
       const response = await axios.post('/api/v1/payment/choose', paymentData)
     
       if (response.status >= 200 && response.status < 300) {
-        alert('payment successful!');
+        setPaymentAlert(true);
+      setPaymentAlertMessage('Payment successful!');
       } else {
         const errorMessage = response.data.error || ' payment.';
         setPaymentError(errorMessage);
@@ -89,6 +99,8 @@ const Offers = () => {
   };
 
   return (
+   
+
     <div style={{ position: 'relative' }}>
       <div style={{ backgroundImage: `url("${Background}")`, height: "300px", backgroundSize: "cover", backgroundPosition: "center" }}>
         {/* Background image */}
@@ -131,11 +143,16 @@ const Offers = () => {
                           <label className="form-label" htmlFor="form3Example3">Promo Code</label>
                         </div>
                       }
+                      {showAlert && <Alert variant="success">{alertMessage}</Alert>}
                       {(paymentMethod === 'visa') &&
+                      
                         <button type="button" className="btn btn-dark btn-lg btn-block mb-4" onClick={handlePromoCodeSubmit}>
                           Apply Promo Code
                         </button>
+                        
                       }
+                      
+
                       {promoCodeError && <p style={{ color: 'red' }}>{promoCodeError}</p>}
                       {(paymentMethod === 'visa') &&
                         <div className="row mb-4">
@@ -169,9 +186,13 @@ const Offers = () => {
                           </div>
                         </div>
                       }
+                      {paymentAlert && <Alert variant="success">{paymentAlertMessage}</Alert>}
+
                       <button type="button" className="btn btn-dark btn-lg btn-block" onClick={handlePaymentSubmit}>
                         Continue to checkout
                       </button>
+                     
+
                       {(paymentMethod === 'visa') && <div>{paymentError && <p style={{ color: 'red' }}>{paymentError}</p>}</div>}
                     </form>
                   </div>
@@ -182,6 +203,7 @@ const Offers = () => {
         </div>
       </section>
     </div>
+    
   );
 };
 

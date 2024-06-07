@@ -32,7 +32,7 @@ function Profile() {
         setLoading(false);
         return;
       }
-      const response = await axios.get('/api/v1/users/getMe', {
+      const response = await axios.get('/api/v1/profile/getMe', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -96,7 +96,7 @@ function Profile() {
         updatedUserData.append('avatar', formData.avatar);
       }
 
-      await axios.put('/api/v1/users/updateMe', updatedUserData, {
+      await axios.put('/api/v1/profile/updateMe', updatedUserData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
