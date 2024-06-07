@@ -4,6 +4,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "../css/ManageStations.css";
 import StationRow from "./StationRow";
 import { useParams } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 
 const mapContainerStyle = {
   width: "100%",
@@ -23,13 +24,16 @@ const YourComponent = (props) => {
   const [description, setDescription] = useState("");
   const [marker, setMarker] = useState(props.center);
   const [stations, setStations] = useState([]);
+  const [showUpdateAlert, setShowUpdateAlert] = useState(false); // Added this line
+  const [showAddSuccess, setShowAddSuccess] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("/api/v1/stations/getAllStations");
         setStations(response.data.data); // Assuming the data array is under 'data' key
-        alert("Data fetched successfully");
+       
       } catch (error) {
         console.error("Error fetching data:", error);
         alert("Failed to fetch data");
@@ -43,7 +47,7 @@ const YourComponent = (props) => {
       axios.delete(`/api/v1/stations/${stationId}`)
         .then(() => {
           setStations(stations.filter((station) => station._id !== stationId));
-          alert("Station deleted successfully");
+         
         })
         .catch((error) => {
           console.error("Error deleting station:", error);
@@ -66,7 +70,6 @@ const YourComponent = (props) => {
       });
   };
   
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,7 +89,9 @@ const YourComponent = (props) => {
             setAddress("");
             setDescription("");
             setMarker(props.center);
-            alert("Station added successfully");
+            // alert("Station added successfully");
+            setShowAddSuccess(true);
+          setTimeout(() => setShowAddSuccess(false), 2000);
         })
         .catch((error) => {
             console.error("Error adding station:", error);
@@ -127,7 +132,7 @@ const YourComponent = (props) => {
         </tbody>
       </table>
 
-      <div className="container-add-stations">
+      <div className="container-add-stations"> 
         <h2>Add a station</h2>
         <form onSubmit={handleSubmit}>
       <input
@@ -160,7 +165,10 @@ const YourComponent = (props) => {
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Description"
       />
-      <button type="submit">Add Station</button>
+      <button variant="success" type="submit">Add Station</button>
+      <Alert variant="success" show={showAddSuccess}>
+                <Alert.Heading>station added successfully</Alert.Heading>
+              </Alert>
     </form>
       </div>
     </div>

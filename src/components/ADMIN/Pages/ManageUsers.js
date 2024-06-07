@@ -43,7 +43,7 @@ function ManageUsers() {
         axios.get('/api/v1/users')
             .then(response => {
                 setUsers(response.data.data);
-				alert('fetch useres successfully');
+				
             })
             .catch(error => {
                 console.error('Error fetching users:', error);
@@ -87,7 +87,7 @@ function ManageUsers() {
 				console.log(response.data);
 				setUsers(users.map(user => (user._id === userId ? response.data.data : user)));
 				setEditingId(null);
-				alert('User updated successfully');
+				
 			})
 			.catch(error => {
 				console.error('Error updating user:', error);
@@ -101,7 +101,7 @@ const handleDelete = (userId) => {
 		axios.delete(`/api/v1/users/${userId}`)
 			.then(() => {
 				setUsers(users.filter(user => user._id !== userId));
-				alert('User deleted successfully');
+				 
 			})
 			.catch(error => {
 				console.error('Error deleting user:', error);

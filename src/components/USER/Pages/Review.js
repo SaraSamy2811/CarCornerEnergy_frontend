@@ -3,10 +3,13 @@ import axios from 'axios';
 import StarRating from './StarRating'; // Import the StarRating component
 import './ReviewApp.css'; // Import your CSS file for styling
 import backgroundImage from '../../../assests/imges/background.jpg';
+import Alert from 'react-bootstrap/Alert';
 
 const ReviewApp = () => {
   const [reviews, setReviews] = useState([]);
   const [formData, setFormData] = useState({ title: '', body: '', rating: '' });
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   useEffect(() => {
     fetchReviews();
@@ -16,10 +19,10 @@ const ReviewApp = () => {
     try {
       const response = await axios.get('/api/v1/reviews/ViewAllreviews');
       setReviews(response.data);
-      alert('list of reviews');
+      // alert('list of reviews');
     } catch (error) {
       console.error('Error fetching reviews:', error);
-      alert('dont sent');
+      // alert('dont sent');
     }
   };
 
@@ -35,7 +38,9 @@ const ReviewApp = () => {
       console.log('Review created:', response.data);
       setFormData({ title: '', body: '', rating: '' });
       fetchReviews();
-      alert('review added successfully');
+      setShowAlert(true);
+          setAlertMessage('review added successfully');
+     
     } catch (error) {
       console.error('Error creating review:', error);
       alert('failed to add review');
@@ -44,6 +49,7 @@ const ReviewApp = () => {
 
   return (
     <div>
+     
     <section className="text-center">
     <div className="p-5 bg-image" style={{ backgroundImage:`url(${backgroundImage})`, height: "300px" ,backgroundSize: "cover", backgroundPosition: "center" }}></div>
     <div className="card mx-4 mx-md-5 shadow-5-strong" style={{ marginTop: "-100px", background: "hsla(0, 0%, 100%, 0.8)", backdropFilter: "blur(10px)", maxWidth: "92.5%" }}>
@@ -70,6 +76,7 @@ const ReviewApp = () => {
   </div>
 
   <button type="submit" className="btn btn-warning">Submit Review</button>
+  {showAlert && <Alert variant="success">{alertMessage}</Alert>}
 </form>
 
 
