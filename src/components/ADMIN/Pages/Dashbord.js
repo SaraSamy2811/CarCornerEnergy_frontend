@@ -93,7 +93,7 @@ useEffect(() => {
         localStorage.setItem('dashboardData', JSON.stringify(newData));
         return newData;
       });
-      alert('Visitors data fetched successfully');
+     // alert('Visitors data fetched successfully');
     } catch (error) {
       console.error('Error fetching visitors data:', error);
       alert('Failed to fetch visitors data');
