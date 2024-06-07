@@ -34,7 +34,7 @@ const Dashbord = () => {
           localStorage.setItem('dashboardData', JSON.stringify(newData));
           return newData;
         });
-        alert("Coupons data fetched successfully");
+        // alert("Coupons data fetched successfully");
       } catch (error) {
         console.error("Error fetching coupons data:", error);
         alert("Failed to fetch coupons data");
@@ -54,7 +54,7 @@ const Dashbord = () => {
           localStorage.setItem('dashboardData', JSON.stringify(newData));
           return newData;
         });
-        alert("Stations data fetched successfully");
+        // alert("Stations data fetched successfully");
       } catch (error) {
         console.error("Error fetching stations data:", error);
         alert("Failed to fetch stations data");
@@ -74,7 +74,7 @@ const Dashbord = () => {
           localStorage.setItem('dashboardData', JSON.stringify(newData));
           return newData;
         });
-        alert('Users data fetched successfully');
+        // alert('Users data fetched successfully');
       } catch (error) {
         console.error('Error fetching users data:', error);
         alert('Failed to fetch users data');

@@ -58,7 +58,7 @@ function MyLocationMap() {
             setMake(userData.make);
             setModel(userData.model);
             setLoading(false);
-            alert('Your profile data has been successfully fetched!');
+            // alert('Your profile data has been successfully fetched!');
         } catch (error) {
             alert('Failed to fetch profile data!');
             setError('An error occurred while fetching user profile.');

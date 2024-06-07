@@ -21,6 +21,8 @@ const Offers = () => {
   });
   const [showAlert, setShowAlert] = useState(false);
 const [alertMessage, setAlertMessage] = useState('');
+const [showPromoCodeMessage, setShowPromoCodeMessage] = useState(false);
+
 const [paymentAlert, setPaymentAlert] = useState(false);
 const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
 
@@ -65,6 +67,7 @@ const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
       } else {
           setPromoCodeError('An error occurred while processing the request.');
       }
+      setShowAlert(false); 
   }
   
 };
