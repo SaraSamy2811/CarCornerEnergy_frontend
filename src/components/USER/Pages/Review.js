@@ -10,7 +10,7 @@ const ReviewApp = () => {
   const [formData, setFormData] = useState({ title: '', body: '', rating: '' });
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-
+  
   useEffect(() => {
     fetchReviews();
   }, []);
@@ -39,7 +39,7 @@ const ReviewApp = () => {
       setFormData({ title: '', body: '', rating: '' });
       fetchReviews();
       setShowAlert(true);
-          setAlertMessage('review added successfully');
+      setTimeout(() => setShowAlert(false), 2000);
      
     } catch (error) {
       console.error('Error creating review:', error);
@@ -76,7 +76,9 @@ const ReviewApp = () => {
   </div>
 
   <button type="submit" className="btn btn-warning">Submit Review</button>
-  {showAlert && <Alert variant="success">{alertMessage}</Alert>}
+  <Alert variant="success" show={showAlert}>
+                <Alert.Heading>review added successfully</Alert.Heading>
+              </Alert>
 </form>
 
 
