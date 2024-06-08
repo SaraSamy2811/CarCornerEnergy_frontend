@@ -175,7 +175,7 @@ const YourComponent = (props) => {
                     <Button variant="success" onClick={handleSaveEdit}>Save</Button >
                     <Button variant="secondary" onClick={() => setEditStationId(null)}>Cancel</Button>
                     <Alert variant="success" show={showUpdateAlert}>
-                      <Alert.Heading>Coupon updated successfully</Alert.Heading>
+                      <Alert.Heading>Station updated successfully</Alert.Heading>
                      
                     </Alert>
                   </td>
