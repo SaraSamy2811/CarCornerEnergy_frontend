@@ -12,6 +12,7 @@ const Offers = () => {
   const [promoCodeError, setPromoCodeError] = useState('');
   const [promoCode, setPromoCode] = useState('');
   const [paymentError, setPaymentError] = useState('');
+  const [showUpdateAlert, setShowUpdateAlert] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('cash'); // Default payment method
   const [paymentData, setPaymentData] = useState({
     nameOnCard: '',
@@ -25,6 +26,7 @@ const [showPromoCodeMessage, setShowPromoCodeMessage] = useState(false);
 
 const [paymentAlert, setPaymentAlert] = useState(false);
 const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
+
 
 
   const handleInputChange = (e) => {
@@ -51,8 +53,8 @@ const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
     try {
       const response = await axios.get(`/api/v1/coupons/${promoCode}`);
       if (response.status >= 200 && response.status < 300) {
-          setShowAlert(true);
-          setAlertMessage('PromoCode successful!');
+        setShowUpdateAlert(true);
+        setTimeout(() => setShowUpdateAlert(false), 2000);
           // Handle further actions upon successful promo code verification
       } else {
           const errorMessage = response.data.msg || 'An error occurred while sending the promoCode.';
@@ -76,7 +78,7 @@ const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
   const handlePaymentSubmit = async () => {
     const { nameOnCard, creditCardNumber, expiration, cvv } = paymentData;
     if (paymentMethod === 'visa' 
-    && (!nameOnCard || !creditCardNumber || !expiration || !cvv)) {
+    && (!nameOnCard || !creditCardNumber || !expiration || !cvv )) {
       setPaymentError('Please fill all payment fields.');
       
       return;
@@ -85,8 +87,8 @@ const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
       const response = await axios.post('/api/v1/payment/choose', paymentData)
     
       if (response.status >= 200 && response.status < 300) {
-        setPaymentAlert(true);
-      setPaymentAlertMessage('Payment successful!');
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 2000);
       } else {
         const errorMessage = response.data.error || ' payment.';
         setPaymentError(errorMessage);
@@ -143,20 +145,30 @@ const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
                         </label>
                       </div>
                       {(paymentMethod === 'visa' ) &&
-                        <div className="form-outline mb-4">
-                       ('use" promo5 to get a discount')
-                          <input type="text" id="form3Example3" className="form-control" name="promoCode" value={promoCode} onChange={handleInputChange} />
-                          <label className="form-label" htmlFor="form3Example3">Promo Code</label>
-                        </div>
-                      }
-                      {showAlert && <Alert variant="success">{alertMessage}</Alert>}
+  <div className="form-outline mb-4">
+    <div className="d-flex align-items-center mb-2">
+      <div className="bg-warning p-2 mr-2">use "promo5" to get a discount</div>
+    </div>
+    <input type="text" id="form3Example3" className="form-control" name="promoCode" value={promoCode} onChange={handleInputChange} />
+    <label className="form-label" htmlFor="form3Example3">Promo Code</label>
+  </div>
+}
+
+
+                     
                       {(paymentMethod === 'visa') &&
                       
                         <button type="button" className="btn btn-dark btn-lg btn-block mb-4" onClick={handlePromoCodeSubmit}>
                           Apply Promo Code
                         </button>
+
+
                         
                       }
+                       <Alert variant="success" show={showUpdateAlert}>
+                      <Alert.Heading>successful promoCode</Alert.Heading>
+                     
+                    </Alert>
                       
 
                       {promoCodeError && <p style={{ color: 'red' }}>{promoCodeError}</p>}
@@ -192,7 +204,9 @@ const [paymentAlertMessage, setPaymentAlertMessage] = useState('');
                           </div>
                         </div>
                       }
-                      {paymentAlert && <Alert variant="success">{paymentAlertMessage}</Alert>}
+                     <Alert variant="success" show={showAlert}>
+                <Alert.Heading>payment successfully</Alert.Heading>
+              </Alert>
 
                       <button type="button" className="btn btn-dark btn-lg btn-block" onClick={handlePaymentSubmit}>
                         Continue to checkout
